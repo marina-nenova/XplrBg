@@ -87,15 +87,9 @@ class Location(AuditInfoMixin, models.Model):
 
 
 class LocationImage(models.Model):
-    IMAGE_WIDTH = 1000
-    IMAGE_HEIGHT = 500
-    UPLOAD_FOLDER = 'XplrBg/Locations/Images'
-
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="location_images")
     image = CloudinaryField(
         'image',
-        folder=UPLOAD_FOLDER,
-        transformation={'crop': 'fill', 'width': IMAGE_WIDTH, 'height': IMAGE_HEIGHT},
         null=True,
         blank=True
     )
