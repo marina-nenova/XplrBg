@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Fontawsome -->
+    <script src="https://kit.fontawesome.com/cc87dce3b6.js" crossorigin="anonymous"></script>
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+    <title>Explore-BG</title>
+</head>
+
+<body class="bg-gray">
+<!-- =============================== Nav Bar =============================== -->
+<section id="nav-bar">
+    <div class="bg-white d-flex align-items-center fixed-top shadow feed-navbar">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <!-- Search -->
+                <div class="col d-flex align-items-center">
+                    <!-- Logo -->
+                    <a href="{% url 'home' %}">
+                        <img class="logo" src="{% static 'images/favicon.ico' %}" alt="logo">
+                    </a>
+                    <!-- End Logo -->
+
+                    <!-- Search Bar -->
+                    <div class="input-group search-bar">
+                        <span class="input-group-prepend d-md-block" data-bs-toggle="dropdown" aria-expanded="false">
+                            <form class="d-flex" role="search" class="search-bar">
+                                <input class="form-control me-2 rounded-pill search-input bg-gray border-0"
+                                       type="search"
+                                       placeholder="Search" aria-label="Search">
+                            </form>
+                        </span>
+                    </div>
+                    <!-- End Search Bar -->
+
+
+                </div>
+                <!-- Nav -->
+                <div class="col d-none d-md-flex justify-content-center">
+
+                    <!-- Home -->
+                    <div class="mx-4 nav__btn">
+                        <a href="{% url 'home' %}" class="btn px-4 nav_button">
+                            <i class="fa-solid fa-house-user fs-4 text-muted"></i>
+                        </a>
+                    </div>
+                    <!-- My Passports -->
+                    <div class="mx-4 nav__btn">
+                        <button class="btn px-4 nav_button">
+                            <i class="fa-solid fa-passport fs-4 text-muted"></i>
+                        </button>
+                    </div>
+                    <!-- Want to visit -->
+                    <div class="mx-4 nav__btn">
+                        <button class="btn px-4 nav_button">
+                            <i class="fa-solid fa-heart fs-4 text-muted"></i>
+                        </button>
+                    </div>
+
+                </div>
+                <!-- End nav -->
+
+                <!-- Menus -->
+                <div class="col d-flex align-items-center justify-content-end">
+                    <!-- Avatar -->
+                    <div class="d-none d-xl-flex align-items-center justify-content-center">
+                        <a href="{% url 'details profile' pk=request.user.pk %}"
+                           class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                            {% if request.user.user_profile.profile_image %}
+                            <img
+                                src="{{ request.user.user_profile.profile_image.url }}" alt="avatar"
+                                class="avatar rounded-circle me-2">
+                            {% else %}
+                                <img
+                                src="{% static 'images/profile-default_image.webp' %}" alt="default-image"
+                                class="avatar rounded-circle me-2">
+                            {% endif %}
+                            <p class="username m-0">{{ request.user.user_profile.get_full_name }}</p>
+                        </a>
+                    </div>
+                    <!-- Dropdown menu -->
+                    <div class="d-flex align-items-center justify-content-center p-1 mx-2 rounded-circle nav-menu bg-gray"
+                         type="button" id="mainMenu" data-bs-toggle="dropdown" aria-haspopup="true"
+                         aria-expanded="false">
+                        <i class="fa-solid fa-ellipsis fs-4"></i>
+                    </div>
+                    <!-- Main menu dropdown -->
+                    <ul class="dropdown-menu border-0 shadow p-3 overflow-auto dd-menu" aria-labelledby="mainMenu"
+                        style="width: 23em; max-height: 600px">
+
+                        <!-- Profile -->
+                        <li class="p-1 mx-2">
+                            <h2>Menu</h2>
+                        </li>
+                        <hr>
+                        <!-- Go to -->
+                        <h4 class="m-2 dd-header">Go to</h4>
+                        <li class="my-2 p-1">
+                            <a href="{% url 'home' %}"
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-house-user fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">Home</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="my-2 p-1">
+                            <a href=""
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-passport fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">My Passports</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="my-2 p-1">
+                            <a href=""
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-heart fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">Want to visit</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="my-2 p-1">
+                            <a href=""
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-star fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">Top 10</p>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- End Go to -->
+                        <hr>
+
+                        <!-- Profile -->
+                        <h4 class="m-2 dd-header">Profile</h4>
+                        <li class="my-2 p-1">
+                            <a href="{% url 'details profile' pk=request.user.pk %}"
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-user fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">View</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="my-2 p-1">
+                            <a href="{% url 'edit profile' pk=request.user.pk %}"
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-pen-to-square fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">Edit</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="my-2 p-1">
+                            <a href="{% url 'logout user' %}"
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-right-from-bracket fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">Logout</p>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- End Profile -->
+
+
+                    </ul>
+
+                </div>
+                <!-- End Menus -->
+            </div>
+
+        </div>
+
+
+    </div>
+</section>
+<!-- =============================== End Nav Bar =============================== -->
+{% block page-content %}
+
+{% endblock %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+
+<script>
+        const tooltips = document.querySelectorAll('.tt')
+        tooltips.forEach(t => {
+            new bootstrap.Tooltip(t)
+        })
+    </script>
+</body>
+
+</html>

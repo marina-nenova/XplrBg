@@ -61,7 +61,7 @@ class ProfileEditForm(forms.ModelForm):
     profile_image = CloudinaryFileField(
         options={
             'use_filename': True,
-            'folder': 'Profiles/Images',
+            'folder': 'XplrBg/Profiles/Images',
             'crop': 'limit', 'width': 300, 'height': 300,
         }
     )

@@ -1,10 +1,13 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm
+from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEditForm
+from XplrBg.accounts.models import UserProfile
+from XplrBg.core.utils.utils import is_owner
 
 UserModel = get_user_model()
 
@@ -30,3 +33,37 @@ class UserLoginView(SuccessMessageMixin, auth_views.LoginView):
 
 class UserLogoutView(auth_views.LogoutView):
     pass
+
+
+class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
+    template_name = 'profiles/profile-details.html'
+    model = UserProfile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+    #     all_locations = Location.objects.all()
+    #     visited_locations = self.object.visited_locations.all().prefetch_related('location_images')
+    #     wishlist_locations = self.object.locations_wishlist.all().prefetch_related('location_images')
+    #
+    #     for location_set in [visited_locations, wishlist_locations]:
+    #         get_location_feature_image(location_set)
+    #
+        context['is_owner'] = is_owner(self.request, self.object)
+    #     context['visited_locations'] = visited_locations
+    #     context['wishlist_locations'] = wishlist_locations
+    #     context['all_locations'] = all_locations
+
+        return context
+
+
+class UserProfileEditView(LoginRequiredMixin, views.UpdateView):
+    template_name = 'profiles/profile-edit-page.html'
+    model = UserProfile
+    form_class = ProfileEditForm
+
+    def get_success_url(self):
+        return reverse_lazy('details profile', kwargs={
+            'pk': self.request.user.pk,
+        })
+
+

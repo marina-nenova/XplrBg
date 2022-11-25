@@ -1,7 +1,7 @@
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MinLengthValidator
 from django.db import models
 
 from XplrBg.accounts.managers import AppUserManager
@@ -38,25 +38,24 @@ class UserProfile(AuditInfoMixin, models.Model):
     LIVES_AT_MAX_LENGTH = 50
     LIVES_AT_MIN_LENGTH = 2
 
-
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LENGTH,
         null=True,
         blank=True,
-        validators=(MinValueValidator(FIRST_NAME_MIN_LENGTH),)
+        validators=(MinLengthValidator(FIRST_NAME_MIN_LENGTH),)
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LENGTH,
         null=True,
         blank=True,
-        validators=(MinValueValidator(LAST_NAME_MIN_LENGTH),)
+        validators=(MinLengthValidator(LAST_NAME_MIN_LENGTH),)
     )
     lives_at = models.CharField(
         max_length=LIVES_AT_MAX_LENGTH,
         null=True,
         blank=True,
-        validators=(MinValueValidator(LIVES_AT_MIN_LENGTH),)
+        validators=(MinLengthValidator(LIVES_AT_MIN_LENGTH),)
 
     )
     profile_image = CloudinaryField(

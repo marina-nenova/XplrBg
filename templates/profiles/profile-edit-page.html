@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block page-content %}
+
+    <div class="row d-flex justify-content-center" style="margin-top: 80px">
+        <div class="col-lg-8 text-center"
+             style="max-width: 30rem; width: 100%">
+            <div class="card bg-white shadow rounded border-0 p-2">
+                <div class="card-body text-md-start">
+                    <div class="card-header justify-content-between text-center">
+                        {% if object.profile_image %}
+                            <img src="{{ object.profile_image.url }}"
+                                 class="rounded-circle profile-photo object-fit-cover my-2"
+                                 alt="profile-picture">
+                        {% else %}
+                            <img src="{% static 'images/profile-default_image.webp' %}"
+                                 class="rounded-circle profile-photo object-fit-cover my-2"
+                                 alt="profile-picture">
+                        {% endif %}
+                    </div>
+                    <form action="{% url 'edit profile' pk=object.pk %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Profile Picture</label>
+                            <input class="form-control" type="file" id="formFile" name="profile_image">
+                        </div>
+
+                            {% for error in form.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
+
+                        <div class="mb-1" >
+                            <label for="firstName" class="form-label">First Name</label>
+                            {{ form.first_name }}
+                            {#<input type="text" class="form-control" id="firstName" aria-describedby="emailHelp">#}
+                        </div>
+                        <div class="mb-1">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            {{ form.last_name }}
+                            {#<input type="text" class="form-control" id="lastName" aria-describedby="emailHelp">#}
+                        </div>
+
+                        <div class="mb-1">
+                            <label for="livesAt" class="form-label">Where do you live</label>
+                            {{ form.lives_at }}
+                            {#<input type="text" class="form-control" id="lastName" aria-describedby="emailHelp">#}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 my-3">Save Changes</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    <h1>Update form</h1>#}
+{#    <img src="{{ request.user.user_profile.profile_image.url }}" alt="" style="max-height: 100px; max-width: 100px">#}
+{#    <form method="POST" action="{% url 'edit profile' pk=object.pk %}" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit">Submit</button>#}
+{##}
+{#    </form>#}
+
+{% endblock %}
