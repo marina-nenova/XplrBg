@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
 
     #Project Apps
     'XplrBg.accounts',
+    'XplrBg.common',
 
 
     #Third-party-apps
@@ -124,6 +126,10 @@ STATICFILES_DIRS = [BASE_DIR / 'staticfiles/']
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+LOGIN_URL = reverse_lazy('login user')
+LOGOUT_REDIRECT_URL = reverse_lazy('login user')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
 
 
 import cloudinary
