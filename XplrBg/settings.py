@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     #Project Apps
     'XplrBg.accounts',
     'XplrBg.common',
+    'XplrBg.locations',
 
 
     #Third-party-apps
