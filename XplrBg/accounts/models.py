@@ -41,15 +41,15 @@ class UserProfile(AuditInfoMixin, models.Model):
 
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LENGTH,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         validators=(MinValueValidator(FIRST_NAME_MIN_LENGTH),)
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LENGTH,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         validators=(MinValueValidator(LAST_NAME_MIN_LENGTH),)
     )
     lives_at = models.CharField(

@@ -1,0 +1,84 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"/>
+    <!-- main style -->
+    <link rel="stylesheet" href="{% static 'register.css' %}"/>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=DM+Serif+Display&family=Lora:wght@700&family=Merriweather:wght@400;900&family=Montserrat:wght@100;400;900&family=Parisienne&family=Sacramento&family=Ubuntu&display=swap"
+            rel="stylesheet">
+
+    <title>Explore-BG</title>
+</head>
+
+<body style="background-image: url('{% static "images/fortress-day.jpg" %}')">
+<!-- Login -->
+<div class='container-lg'>
+    <div class="row justify-content-center align-items-center my-3 g-5">
+        <!-- Intro info -->
+        <div class="col-lg-6 text-center text-lg-start order-2 order-lg-1 my-1">
+            <h1 class="display-2" id="title-text">
+                Explore BG
+            </h1>
+            <p class="lead my-4" id="subtitle-text">Discover over 150 locations in Bulgaria and share your experience</p>
+        </div>
+        <!-- Register form -->
+        <div class="col-lg-6 text-center d-lg-block order-1 order-lg-2 my-4 g-5"
+             style="max-width: 30rem; width: 100%">
+            <div class="card bg-white shadow rounded border-0 p-2">
+                <div class="card-body text-center text-md-start">
+                    <form action="{% url 'register user' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="mb-1">
+                            <label for="email" class="form-label">Email address</label>
+                            {{ form.email }}
+                            {% for error in form.email.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                        <div class="mb-1">
+                            <label for="Password1" class="form-label">Password</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="mb-1">
+                            <label for="Password2" class="form-label">Repeat Password</label>
+                            {{ form.password2 }}
+                            {% for error in form.password2.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 my-3">Register</button>
+                        <div class="mb-3">
+                            <p class="mb-1">Already signed up?</p>
+                            <a href="{% url 'login user' %}" class="btn btn-success w-100" type="button">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End register form -->
+    </div>
+</div>
+
+</body>
+
+</html>

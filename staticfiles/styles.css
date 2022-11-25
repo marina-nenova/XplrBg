@@ -1,0 +1,205 @@
+.bg-gray {
+    background-color: #f0f2f5;
+}
+
+.fs-0 {
+    font-size: 4rem;
+}
+
+.fs-7 {
+    font-size: 0.8rem;
+}
+
+/* ============= Navbar ============= */
+
+.feed-navbar {
+    min-height: 56px;
+    z-index: 5;
+}
+
+.logo {
+    padding: 10px;
+    width: 60px;
+    height: 60px;
+}
+
+.search-bar {
+    margin-left: 2px;
+    min-height: 40px;
+    min-width: 230px;
+}
+
+/* Nav buttons */
+
+.nav__btn button:hover {
+    background: #f0f2f5 !important;
+}
+
+.nav__btn button:hover i {
+    color: #3a9b8b !important;
+}
+
+.nav__btn-active i {
+    color: #3a9b8b !important;
+}
+
+.nav__btn-active {
+    position: relative;
+}
+
+.nav__btn-active:before {
+    content: "";
+    position: absolute;
+    bottom: -4.5px;
+    left: 0;
+    transform: translate(0, 4.5px);
+    width: 100%;
+    height: 3px;
+    border-bottom: 3px solid #25907e !important;
+}
+
+/* Menus */
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    object-fit: cover;
+}
+
+.nav-menu {
+    width: 38px;
+    height: 38px;
+    object-fit: cover;
+    color: #3a9b8b;
+}
+
+.dd-header {
+    color: #3a9b8b;
+}
+
+.dd-menu a:hover {
+    background: #f0f2f5 !important;
+}
+
+.dd-menu a:hover p {
+    color: #3a9b8b !important;
+
+}
+
+.dd-menu a:hover i {
+    color: #3a9b8b !important;
+}
+
+/* ============= END Navbar ============= */
+
+
+/* ============= Side Bar ============= */
+
+.side-bar {
+    max-width: 360px;
+    width: 100%;
+    z-index: 4;
+}
+
+#top-ten-left {
+    padding-top: 56px;
+}
+
+#top-ten-right {
+    left: initial !important;
+}
+
+.badge {
+    background-color: #25907e;
+}
+
+span {
+    color: white;
+}
+
+hr {
+    margin: 1px;
+}
+
+/* ============= END Side Bar ============= */
+
+/* ============= POSTS ============= */
+
+.main-feed {
+    padding-top: 56px;
+    max-width: 680px;
+    width: 100%;
+}
+
+/* Comment */
+
+.post__comment .accordion-button:after {
+    margin-left: 0 !important;
+    display: none !important;
+}
+
+.post__comment .accordion-button:hover {
+    background: transparent !important;
+    border-color: transparent !important;
+}
+
+.post__comment .accordion-button:not(.collapsed) {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* ============= END POSTS ============= */
+
+
+/* ============= Profile Page ============= */
+
+.profile-photo {
+    width: 168px;
+    height: 168px;
+}
+
+/* ============= END Profile Page ============= */
+
+
+/* Location-details-page */
+
+.carousel img {
+    object-fit: cover;
+!important;
+    object-position: center;
+!important;
+    height: 50vh;
+!important;
+    overflow: hidden;
+!important;
+}
+
+.rating-list li {
+    float: right;
+    color: gray;
+    padding: 10px 5px;
+}
+
+.rating-list li a i{
+    text-decoration: none;
+    color: gray;
+
+}
+
+.rating-list li a i:hover,
+.rating-list li:hover ~ li a i{
+    color: orange;
+}
+
+.rating-list {
+    display: inline-block;
+    list-style: none;
+}
+
+.checked {
+    color: orange; !important;
+}
+.rating-list li a i.checked{
+    text-decoration: none;
+    color: orange; !important;
+}

@@ -9,61 +9,27 @@ UserModel = get_user_model()
 
 
 class UserRegistrationForm(UserCreationForm):
-    first_name = forms.CharField(
-        max_length=30,
-    )
-    last_name = forms.CharField(
-        max_length=30,
-    )
     error_messages = {
         'password_mismatch': "The passwords don't match",
     }
 
     class Meta:
         model = UserModel
-        fields = (UserModel.USERNAME_FIELD, 'first_name', 'last_name', 'password1', 'password2')
+        fields = (UserModel.USERNAME_FIELD, 'password1', 'password2')
         error_messages = {
             UserModel.USERNAME_FIELD: {
                 'unique': 'User with this email already exists',
             },
         }
+        labels = {
+            UserModel.USERNAME_FIELD: 'Email address',
+            'password1': 'Password',
+            'password2': 'Repeat Password',
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
-
-    # def save(self, commit=True):
-    #     user = super().save(commit=commit)
-    #     first_name = self.cleaned_data['first_name']
-    #     last_name = self.cleaned_data['last_name']
-    #
-    #     profile = Profile(
-    #         first_name=first_name,
-    #         last_name=last_name,
-    #         user=user
-    #     )
-    #     if commit:
-    #         profile.save()
-    #     return user
-
-
-class ProfileEditForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('profile_image', 'first_name', 'last_name', 'lives_at')
-
-    profile_image = CloudinaryFileField(
-        options={
-            'use_filename': True,
-            'folder': 'Profiles/Images',
-            'crop': 'limit', 'width': 300, 'height': 300,
-        }
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
 
@@ -85,3 +51,22 @@ class UserLoginForm(AuthenticationForm):
                 raise forms.ValidationError("Incorrect password")
 
         return super().clean()
+
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('profile_image', 'first_name', 'last_name', 'lives_at')
+
+    profile_image = CloudinaryFileField(
+        options={
+            'use_filename': True,
+            'folder': 'Profiles/Images',
+            'crop': 'limit', 'width': 300, 'height': 300,
+        }
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'

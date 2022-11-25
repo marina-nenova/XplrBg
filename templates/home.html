@@ -8,6 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+<a href="{% url 'login user' %}">Login</a>
+<a href="{% url 'register user' %}">Register</a>
+<a href="{% url 'logout user' %}">Logout</a>
 <h1>{{ user }}</h1>
 
 </body>
