@@ -1,0 +1,105 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block page-content %}
+    <div class="row mx-2" style="margin-top: 80px;">
+        <div class="col-lg-3 d-none d-lg-block">
+            {% include 'partials/locations-filter.html' %}
+        </div>
+        <div class="col-lg-9">
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <div class="card-header d-lg-none">
+                        <div type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu" aria-expanded="false"
+                             aria-controls="collapseExample">
+                            <i class="fa-solid fa-filter"></i>
+                        </div>
+                    </div>
+                    <div class="collapse" id="filterMenu">
+                        {% include 'partials/locations-filter.html' %}
+                    </div>
+                    <div class="row">
+                        <!-- Locations -->
+                        <!-- L1 -->
+                        {% for location in all_locations %}
+                            <div class="col-lg-4 col-md-6 mt-4">
+                                <div class="card h-100" id="{{ location.pk }}">
+                                    <div class="card-header bg-transparent">
+                                        <a href="{% url 'location details' location.slug %}" type="button"
+                                           class="text-decoration-none d-flex justify-content-center align-items-center">
+                                            <h4 class="text-dark">{{ location.name }}</h4>
+                                        </a>
+                                    </div>
+                                    <img src="{{ location.feature_image.image.url }}" class="h-100"
+                                         alt="{{ location.name }} image" style="max-height: 182px">
+                                    <div class="card-body d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h6 class="card-title avg_rating">Rating:
+                                                <i class="fa fa-star {% if location.average_rating > 0 %} checked {% endif %}"></i>
+                                                <i class="fa fa-star {% if location.average_rating > 1 %} checked {% endif %}"></i>
+                                                <i class="fa fa-star {% if location.average_rating > 2 %} checked {% endif %}"></i>
+                                                <i class="fa fa-star {% if location.average_rating > 3 %} checked {% endif %}"></i>
+                                                <i class="fa fa-star {% if location.average_rating > 4 %} checked {% endif %}"></i>
+                                            </h6>
+                                        </div>
+                                        <div>
+                                            <h6>Visits: {{ location.times_visited }}</h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        {% if location not in visited_locations %}
+                                            <div
+                                                    class="d-flex align-items-center justify-content-between rounded text-muted p-1">
+                                                <a href="{% url 'mark as visited' location.pk %}" class="tt"
+                                                   type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                   title="Mark as visited">
+                                                    <i class="fa-solid fa-check bg-dark rounded-circle fs-5 text-light"></i>
+                                                </a>
+                                                <a href="{% url 'add to wishlist' location.pk %}" class="tt"
+                                                   type="button" data-bs-toggle="tooltip"
+                                                   data-bs-placement="top" title="Want to visit">
+                                                    {% if location in wishlist_locations %}
+                                                        <i class="fa-solid fa-heart bg-gray rounded-circle fs-5 text-danger"></i>
+                                                    {% else %}
+                                                        <i class="fa-solid fa-heart bg-gray rounded-circle fs-5 text-muted"></i>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        {% else %}
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <img src="{% static 'images/vecteezy_green-tick-checkbox-illustration-isolated_10829962_2.png' %}"
+                                                     style="height: 30px; width: 30px" alt="">
+                                            </div>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="col-12 text-center">
+                                <div>
+                                    <h2>No results</h2>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rate = (rating, loc_id) => {
+            fetch(`/locations/rate/${rating}/${loc_pk}/`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(rest => {
+                window.location.reload();
+                // you may want to update the rating here
+                // to simplify stuff, I just reload the page
+            })
+        }
+    </script>
+{% endblock %}
