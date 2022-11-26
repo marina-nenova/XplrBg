@@ -27,7 +27,7 @@
                                     <div class="d-flex justify-content-between">
                                         {% if object.first_name and object.last_name %}
                                             <h1 class="card-title text-md-center">{{ object.get_full_name }}</h1>
-                                            {% else %}
+                                        {% else %}
                                             <h1 class="card-title text-md-center">{{ object.user }}</h1>
                                         {% endif %}
                                         <!-- Edit profile button -->
@@ -40,85 +40,85 @@
 
                                     <p class="card-text">
                                         {% if object.lives_at %}
-                                        <i class="fa-solid fa-location-dot text-muted"></i>
+                                            <i class="fa-solid fa-location-dot text-muted"></i>
                                             Lives at: {{ object.lives_at }}
                                         {% endif %}
                                     </p>
 
-                                    {#                                    <p class="card-text">#}
-                                    {#                                        <i class="fa-solid fa-check text-muted"></i>#}
-                                    {#                                        {{ visited_locations.count }} Visited Locations#}
-                                    {#                                    </p>#}
+                                    <p class="card-text">
+                                        <i class="fa-solid fa-check text-muted"></i>
+                                        {{ visited_locations.all.count }} Visited Locations
+                                    </p>
                                 </div>
                             </div>
-                            {#                            <div class="accordion" id="options">#}
-                            {#                                <div class="accordion-item">#}
-                            {#                                    <div class="accordion-header" id="option1">#}
-                            {#                                        <button class="accordion-button collapsed" type="button"#}
-                            {#                                                data-bs-toggle="collapse"#}
-                            {#                                                data-bs-target="#posts" aria-expanded="false"#}
-                            {#                                                aria-controls="posts">#}
-                            {#                                            Posts#}
-                            {#                                        </button>#}
-                            {#                                    </div>#}
-                            {##}
-                            {#                                </div>#}
-                            {#                                <div class="accordion-item">#}
-                            {#                                    <div class="accordion-header" id="option2">#}
-                            {#                                        <button class="accordion-button collapsed" type="button"#}
-                            {#                                                data-bs-toggle="collapse"#}
-                            {#                                                data-bs-target="#albums" aria-expanded="false"#}
-                            {#                                                aria-controls="albums">#}
-                            {#                                            Albums#}
-                            {#                                        </button>#}
-                            {#                                    </div>#}
-                            {##}
-                            {#                                </div>#}
-                            {#                                <div class="accordion-item">#}
-                            {#                                    <div class="accordion-header" id="option3">#}
-                            {#                                        <button class="accordion-button collapsed" type="button"#}
-                            {#                                                data-bs-toggle="collapse" data-bs-target="#visitedLocations"#}
-                            {#                                                aria-expanded="false" aria-controls="visitedLocations">#}
-                            {#                                            Visited Locations#}
-                            {#                                        </button>#}
-                            {#                                    </div>#}
-                            {##}
-                            {#                                </div>#}
-                            {#                                <div class="accordion-item">#}
-                            {#                                    <div class="accordion-header" id="option4">#}
-                            {#                                        <button class="accordion-button collapsed" type="button"#}
-                            {#                                                data-bs-toggle="collapse" data-bs-target="#wishlist"#}
-                            {#                                                aria-expanded="false" aria-controls="wishlist">#}
-                            {#                                            Wishlist Locations#}
-                            {#                                        </button>#}
-                            {#                                    </div>#}
-                            {##}
-                            {#                                </div>#}
-                            {#                                <div id="posts" class="accordion-collapse collapse" aria-labelledby="option1"#}
-                            {#                                     data-bs-parent="#options">#}
-                            {#                                    <div class="accordion-body">#}
-                            {#                                        {% include 'partials/users-posts.html' %}#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                                <div id="albums" class="accordion-collapse collapse" aria-labelledby="option2"#}
-                            {#                                     data-bs-parent="#options">#}
-                            {#                                    <div class="accordion-body">#}
-                            {#                                        {% include 'partials/users-albums.html' %}#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                                <div id="visitedLocations" class="accordion-collapse collapse"#}
-                            {#                                     aria-labelledby="option3" data-bs-parent="#options">#}
-                            {#                                    <div class="accordion-body">#}
-                            {#                                        {% include 'partials/users-visited-locations.html' %}#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                                <div id="wishlist" class="accordion-collapse collapse" aria-labelledby="option4"#}
-                            {#                                     data-bs-parent="#options">#}
-                            {#                                    <div class="accordion-body">#}
-                            {#                                        {% include 'partials/users-wishlist-locations.html' %}#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
+                            <div class="accordion" id="options">
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="option1">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#posts" aria-expanded="false"
+                                                aria-controls="posts">
+                                            Posts
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="option2">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#albums" aria-expanded="false"
+                                                aria-controls="albums">
+                                            Albums
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="option3">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#visitedLocations"
+                                                aria-expanded="false" aria-controls="visitedLocations">
+                                            Visited Locations
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="accordion-item">
+                                    <div class="accordion-header" id="option4">
+                                        <button class="accordion-button collapsed" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#wishlist"
+                                                aria-expanded="false" aria-controls="wishlist">
+                                            Wishlist Locations
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div id="posts" class="accordion-collapse collapse" aria-labelledby="option1"
+                                     data-bs-parent="#options">
+                                    <div class="accordion-body">
+                                        {% include 'partials/users-posts.html' %}
+                                    </div>
+                                </div>
+                                <div id="albums" class="accordion-collapse collapse" aria-labelledby="option2"
+                                     data-bs-parent="#options">
+                                    <div class="accordion-body">
+                                        {% include 'partials/users-albums.html' %}
+                                    </div>
+                                </div>
+                                <div id="visitedLocations" class="accordion-collapse collapse"
+                                     aria-labelledby="option3" data-bs-parent="#options">
+                                    <div class="accordion-body">
+                                        {% include 'partials/users-visited-locations.html' %}
+                                    </div>
+                                </div>
+                                <div id="wishlist" class="accordion-collapse collapse" aria-labelledby="option4"
+                                     data-bs-parent="#options">
+                                    <div class="accordion-body">
+                                        {% include 'partials/users-wishlist-locations.html' %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

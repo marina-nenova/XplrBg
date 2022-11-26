@@ -1,0 +1,254 @@
+{% load static %}
+<div class="card my-3 border-0 bg-transparent">
+    <div class="card-header bg-transparent justify-content-between">
+       <div class="text-center">
+            <div>
+                <h2 class="">{{ object.first_name }}'s Albums</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <!-- Albums -->
+            <!-- A1 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                <div class="card border-0 h-100">
+                    <img src="{% static 'images/belogradchik.png' %}" class="card-img h-100" alt="...">
+                    <!-- IF USER IS PROFILE USER -->
+                    <div class="card-img-overlay text-dark">
+                        <i class="fas fa-ellipsis-h rounded-circle bg-gray p-1 fs-5" type="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" id="albumMenu"></i>
+                        <!-- edit menu -->
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="albumMenu">
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    View Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Edit Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Delete Album
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END IF -->
+                    <div class="card-body">
+                        <a href="" class="text-decoration-none text-dark">
+                            <p class="card-text mb-0">Belogradchik Fortress</p>
+                            <small>25 elements</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- L2 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                <div class="card border-0 h-100">
+                    <img src="{% static 'images/fortress-day.jpg' %}" class="card-img-top h-100"
+                         alt="...">
+                    <!-- IF USER IS PROFILE USER -->
+                    <div class="card-img-overlay text-dark">
+                        <i class="fas fa-ellipsis-h rounded-circle bg-gray p-1 fs-5" type="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" id="albumMenu"></i>
+                        <!-- edit menu -->
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="albumMenu">
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    View Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Edit Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Delete Album
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END IF -->
+
+                    <div class="card-body">
+                        <a href="" class="text-decoration-none text-dark">
+                            <p class="card-text mb-0">Tsarevets</p>
+                            <small>25 elements</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- L3 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                <div class="card border-0 h-100">
+                    <img src="{% static 'images/black-sea.jpg' %}" class="card-img-top h-100" alt="...">
+                    <!-- IF USER IS PROFILE USER -->
+                    <div class="card-img-overlay text-dark">
+                        <i class="fas fa-ellipsis-h rounded-circle bg-gray p-1 fs-5" type="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" id="albumMenu"></i>
+                        <!-- edit menu -->
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="albumMenu">
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    View Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Edit Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Delete Album
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END IF -->
+                    <div class="card-body">
+                        <a href="" class="text-decoration-none text-dark">
+                            <p class="card-text mb-0">Black sea</p>
+                            <small>25 elements</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- L4 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                <div class="card border-0 h-100">
+                    <img src="{% static 'images/seven-rila-lakes.jpg' %}" class="card-img-top h-100"
+                         alt="...">
+                    <!-- IF USER IS PROFILE USER -->
+                    <div class="card-img-overlay text-dark">
+                        <i class="fas fa-ellipsis-h rounded-circle bg-gray p-1 fs-5" type="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" id="albumMenu"></i>
+                        <!-- edit menu -->
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="albumMenu">
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    View Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Edit Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Delete Album
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END IF -->
+                    <div class="card-body">
+                        <a href="" class="text-decoration-none text-dark">
+                            <p class="card-text mb-0">The seven Rila Lakes</p>
+                            <small>25 elements</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- L5 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                <div class="card border-0 h-100">
+                    <img src="{% static 'images/1200px-Nos_Kaliakra.jpg' %}" class="card-img-top h-100"
+                         alt="...">
+                    <!-- IF USER IS PROFILE USER -->
+                    <div class="card-img-overlay text-dark">
+                        <i class="fas fa-ellipsis-h rounded-circle bg-gray p-1 fs-5" type="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" id="albumMenu"></i>
+                        <!-- edit menu -->
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="albumMenu">
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    View Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Edit Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Delete Album
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END IF -->
+                    <div class="card-body">
+                        <a href="" class="text-decoration-none text-dark">
+                            <p class="card-text mb-0">Cape Kaliakra</p>
+                            <small>25 elements</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- L6 -->
+            <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                <div class="card border-0 h-100">
+                    <img src="{% static 'images/raiskoto-praskalo.jpg' %}" class="card-img-top h-100"
+                         alt="...">
+                    <!-- IF USER IS PROFILE USER -->
+                    <div class="card-img-overlay text-dark">
+                        <i class="fas fa-ellipsis-h rounded-circle bg-gray p-1 fs-5" type="button"
+                           data-bs-toggle="dropdown" aria-expanded="false" id="albumMenu"></i>
+                        <!-- edit menu -->
+                        <ul class="dropdown-menu border-0 shadow" aria-labelledby="albumMenu">
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    View Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Edit Album
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href=""
+                                   class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                    Delete Album
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END IF -->
+                    <div class="card-body">
+                        <a href="" class="text-decoration-none text-dark">
+                            <p class="card-text mb-0">Raisko Praskalo</p>
+                            <small>25 elements</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

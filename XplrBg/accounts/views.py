@@ -7,7 +7,8 @@ from django.views import generic as views
 
 from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEditForm
 from XplrBg.accounts.models import UserProfile
-from XplrBg.core.utils.utils import is_owner
+from XplrBg.core.utils.utils import is_owner, get_location_feature_image
+from XplrBg.locations.models import Location
 
 UserModel = get_user_model()
 
@@ -41,17 +42,15 @@ class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-    #     all_locations = Location.objects.all()
-    #     visited_locations = self.object.visited_locations.all().prefetch_related('location_images')
-    #     wishlist_locations = self.object.locations_wishlist.all().prefetch_related('location_images')
-    #
-    #     for location_set in [visited_locations, wishlist_locations]:
-    #         get_location_feature_image(location_set)
-    #
+        visited_locations = Location.objects.filter(visitedlocations__user_id=self.object.user_id).prefetch_related('location_images')
+        wishlist_locations = Location.objects.filter(wishlist__user_id=self.object.user_id).prefetch_related('location_images')
+
+        for loc_list in [visited_locations, wishlist_locations]:
+            get_location_feature_image(loc_list)
+
         context['is_owner'] = is_owner(self.request, self.object)
-    #     context['visited_locations'] = visited_locations
-    #     context['wishlist_locations'] = wishlist_locations
-    #     context['all_locations'] = all_locations
+        context['visited_locations'] = visited_locations
+        context['wishlist_locations'] = wishlist_locations
 
         return context
 

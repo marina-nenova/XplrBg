@@ -8,7 +8,7 @@ def is_owner(request, obj):
 
 
 def filter_locations(request):
-    locations = Location.objects.all().prefetch_related('location_images')
+    locations = Location.objects.all()
     query = request.GET.get('q', None)
     categories = request.GET.getlist('categories') or None
     regions = request.GET.getlist('regions') or None
@@ -25,6 +25,7 @@ def filter_locations(request):
 
     get_location_feature_image(locations)
     return locations
+
 
 def get_location_feature_image(locations):
     for location in locations:

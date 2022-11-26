@@ -1,0 +1,52 @@
+{% load static %}
+<div class="card my-3 border-0">
+    <div class="card-header bg-transparent justify-content-between">
+
+        <div class="text-center">
+            <div>
+                <h2 class="">{{ object.first_name }}'s Visited Locations</h2>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <!-- Locations -->
+                <!-- L1 -->
+                {% for location in visited_locations %}
+                    <div class="col-lg-4 col-md-6 mt-4">
+                        <div class="card h-100">
+                            <div class="card-header bg-transparent">
+                                <h5 type="button" class="text-center" data-bs-toggle="modal"
+                                    data-bs-target="#locationInfo">{{ location.name }}</h5>
+                            </div>
+
+                            <img src="{{ location.feature_image.image.url }}" class="h-100"
+                                 alt="{{ location.name }} image" style="max-height: 135px">
+
+                            <div class="card-body">
+                                {% if is_owner %}
+                                <!-- IF MARKED AS VISITED -->
+                                <a href="#" class="btn btn-primary w-100" type="button">Create album</a>
+                                <!-- IF ALBUM CREATED -->
+                                {% endif %}
+                                <!-- <button class="btn btn-primary w-100" type="button">View Album</button> -->
+                            </div>
+                            <div class="card-footer">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <img src="{% static 'images/vecteezy_green-tick-checkbox-illustration-isolated_10829962_2.png' %}"
+                                         style="height: 30px; width: 30px" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center">
+                        <div>
+                            <h2>No visited locations yet</h2>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

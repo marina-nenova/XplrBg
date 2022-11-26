@@ -3,7 +3,7 @@
 
 {% block page-content %}
 
-    <div class="row d-flex justify-content-center" style="margin-top: 80px">
+    <div class="row d-flex justify-content-center" style="margin-top: 70px">
         <div class="col-lg-8 text-center"
              style="max-width: 30rem; width: 100%">
             <div class="card bg-white shadow rounded border-0 p-2">
@@ -56,13 +56,4 @@
             </div>
         </div>
     </div>
-{#    <h1>Update form</h1>#}
-{#    <img src="{{ request.user.user_profile.profile_image.url }}" alt="" style="max-height: 100px; max-width: 100px">#}
-{#    <form method="POST" action="{% url 'edit profile' pk=object.pk %}" enctype="multipart/form-data">#}
-{#        {% csrf_token %}#}
-{#        {{ form.as_p }}#}
-{#        <button type="submit">Submit</button>#}
-{##}
-{#    </form>#}
-
 {% endblock %}
