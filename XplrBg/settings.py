@@ -2,7 +2,10 @@ import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
+import environ
 
+env = environ.Env()
+environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-etmdjtm6=4j&n=^q3@c=e4xqylb+1dxswdk5!z0ogjn#55m@2x'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,10 +81,10 @@ WSGI_APPLICATION = 'XplrBg.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'explr_bg_db',
-        'USER': 'marina',
-        'PASSWORD': '891224MN',
+        'ENGINE': env('DATABASE_ENGINE'),
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -136,9 +139,9 @@ LOGIN_REDIRECT_URL = reverse_lazy('home')
 import cloudinary
 
 cloudinary.config(
-    cloud_name='dza6yfrau',
-    api_key='643474315439328',
-    api_secret='ZPH8zrin0N_cxNrz1E5p39XZmS8',
+    cloud_name=env('CLOUDINARY_CLOUD_NAME'),
+    api_key=env('CLOUDINARY_API_KEY'),
+    api_secret=env('CLOUDINARY_API_SECRET'),
 )
 
 import cloudinary.uploader
