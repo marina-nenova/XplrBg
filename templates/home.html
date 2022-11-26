@@ -11,7 +11,13 @@
 <a href="{% url 'login user' %}">Login</a>
 <a href="{% url 'register user' %}">Register</a>
 <a href="{% url 'logout user' %}">Logout</a>
-<h1>{{ user }}</h1>
+<div>
+    {% for user_profile in all_users %}
+    <h1>{{ user_profile }}</h1>
+    <a href="{% url 'details profile' pk=user_profile.pk %}">User details</a>
+    {% endfor %}
 
+    <a href="{% url 'all locations' %}">Browse Locations</a>
+</div>
 </body>
 </html>
