@@ -90,11 +90,13 @@ class LocationImage(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="location_images")
     image = CloudinaryField(
         'image',
-        null=True,
-        blank=True
+        null=False,
+        blank=False,
     )
 
-    is_feature = models.BooleanField(default=False)
+    is_feature = models.BooleanField(
+        default=False,
+    )
 
 
 class Rating(models.Model):

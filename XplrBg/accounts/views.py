@@ -42,8 +42,8 @@ class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        visited_locations = Location.objects.filter(visitedlocations__user_id=self.object.user_id).prefetch_related('location_images')
-        wishlist_locations = Location.objects.filter(wishlist__user_id=self.object.user_id).prefetch_related('location_images')
+        visited_locations = Location.objects.filter(visitedlocations__user_id=self.object.user_id)
+        wishlist_locations = Location.objects.filter(wishlist__user_id=self.object.user_id)
 
         for loc_list in [visited_locations, wishlist_locations]:
             get_location_feature_image(loc_list)
