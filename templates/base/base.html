@@ -12,6 +12,8 @@
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!-- Fontawsome -->
     <script src="https://kit.fontawesome.com/cc87dce3b6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href=
+            "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 
@@ -78,13 +80,13 @@
                         <a href="{% url 'details profile' pk=request.user.pk %}"
                            class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
                             {% if request.user.user_profile.profile_image %}
-                            <img
-                                src="{{ request.user.user_profile.profile_image.url }}" alt="avatar"
-                                class="avatar rounded-circle me-2">
+                                <img
+                                        src="{{ request.user.user_profile.profile_image.url }}" alt="avatar"
+                                        class="avatar rounded-circle me-2">
                             {% else %}
                                 <img
-                                src="{% static 'images/profile-default_image.webp' %}" alt="default-image"
-                                class="avatar rounded-circle me-2">
+                                        src="{% static 'images/profile-default_image.webp' %}" alt="default-image"
+                                        class="avatar rounded-circle me-2">
                             {% endif %}
                             <p class="username m-0">{{ request.user.user_profile.get_full_name }}</p>
                         </a>
@@ -218,11 +220,11 @@
         crossorigin="anonymous"></script>
 
 <script>
-        const tooltips = document.querySelectorAll('.tt')
-        tooltips.forEach(t => {
-            new bootstrap.Tooltip(t)
-        })
-    </script>
+    const tooltips = document.querySelectorAll('.tt')
+    tooltips.forEach(t => {
+        new bootstrap.Tooltip(t)
+    })
+</script>
 </body>
 
 </html>

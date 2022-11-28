@@ -69,45 +69,6 @@
                             {{ location.details }}
                         </p>
                     </div>
-                    <div class="card-footer d-flex justify-content-center align-items-center">
-                        <ul class="btn btn-light list-inline rating-list">
-                            <li>
-                                <a href="{% url 'rate location' rating=5 loc_pk=location.pk %}"
-                                   type="button">
-                                    <i class="fa fa-star{% if location.user_rating > 4 %} checked {% endif %}"
-                                       title="Rate 5"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'rate location' rating=4 loc_pk=location.pk %}"
-                                   type="button">
-                                    <i class="fa fa-star{% if location.user_rating > 3 %} checked {% endif %}"
-                                       title="Rate 4"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'rate location' rating=3 loc_pk=location.pk %}"
-                                   type="button">
-                                    <i class="fa fa-star{% if location.user_rating > 2 %} checked {% endif %}"
-                                       title="Rate 3"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'rate location' rating=2 loc_pk=location.pk %}"
-                                   type="button">
-                                    <i class="fa fa-star{% if location.user_rating > 1 %} checked {% endif %}"
-                                       title="Rate 2"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'rate location' rating=1 loc_pk=location.pk %}"
-                                   type="button">
-                                    <i class="fa fa-star{% if location.user_rating > 0 %} checked {% endif %}"
-                                       title="Rate 1"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

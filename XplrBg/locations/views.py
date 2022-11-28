@@ -1,14 +1,16 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.views import generic as views
 
-from XplrBg.core.utils.utils import filter_locations
+from XplrBg.core.utils.utils import get_location_feature_image
 from XplrBg.locations.models import LocationCategory, LocationRegion, Location, Rating
 
 
 class ShowAllLocations(LoginRequiredMixin, views.ListView):
     context_object_name = 'all_locations'
     template_name = 'locations/locations-list.html'
+    model = Location
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowAllLocations, self).get_context_data(**kwargs)
@@ -21,8 +23,20 @@ class ShowAllLocations(LoginRequiredMixin, views.ListView):
         return context
 
     def get_queryset(self):
-        locations = filter_locations(self.request)
-        return locations
+        queryset = super().get_queryset()
+        query = self.__get_query()
+        if query:
+            queryset = queryset.filter(
+                Q(category__category_name__icontains=query) |
+                Q(region__region__icontains=query) |
+                Q(name__icontains=query)
+            )
+        get_location_feature_image(queryset)
+        return queryset
+
+    def __get_query(self):
+        query = self.request.GET.get('query', None)
+        return query
 
 
 class LocationDetails(views.DetailView):
@@ -42,4 +56,3 @@ def rate_location(request, rating: int, loc_pk):
     location = Location.objects.get(id=loc_pk)
     Rating.objects.filter(location=location, user=request.user).delete()
     location.rating_set.create(user=request.user, rating=rating)
-    return redirect(request.META["HTTP_REFERER"] + f'#{loc_pk}')

@@ -31,19 +31,28 @@
                                     </div>
                                     <img src="{{ location.feature_image.image.url }}" class="h-100"
                                          alt="{{ location.name }} image" style="max-height: 182px">
-                                    <div class="card-body d-flex justify-content-between align-items-center">
-                                        <div>
-                                            <h6 class="card-title avg_rating">Rating:
-                                                <i class="fa fa-star {% if location.average_rating > 0 %} checked {% endif %}"></i>
-                                                <i class="fa fa-star {% if location.average_rating > 1 %} checked {% endif %}"></i>
-                                                <i class="fa fa-star {% if location.average_rating > 2 %} checked {% endif %}"></i>
-                                                <i class="fa fa-star {% if location.average_rating > 3 %} checked {% endif %}"></i>
-                                                <i class="fa fa-star {% if location.average_rating > 4 %} checked {% endif %}"></i>
-                                            </h6>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <small class="card-title avg_rating">Rating:
+                                                    <i class="fa fa-star {% if location.average_rating > 0 %} checked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if location.average_rating > 1 %} checked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if location.average_rating > 2 %} checked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if location.average_rating > 3 %} checked {% endif %}"></i>
+                                                    <i class="fa fa-star {% if location.average_rating > 4 %} checked {% endif %}"></i>
+                                                </small>
+                                            </div>
+                                            <div>
+                                                <h6>Visits: {{ location.times_visited }}</h6>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h6>Visits: {{ location.times_visited }}</h6>
+                                    {% if location in visited_locations %}
+                                        <div class="d-flex justify-content-center align-items-center mt-2">
+                                            <a href="{% url 'create post' loc_pk=location.pk %}"
+                                               class="btn btn-outline-primary w-100" type="button">Create
+                                                Post</a>
                                         </div>
+                                    {% endif %}
                                     </div>
 
                                     <div class="card-footer">

@@ -1,27 +1,52 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h1>
-    Create Post
+{% extends 'base/base.html' %}
 
-</h1>
+{% block page-content %}
 
-<div>
-    <form action="" method="POST" enctype="multipart/form-data">
-        {{ form }}
-        {% csrf_token %}
-        {% for error in form.errors %}
-            {{ error.message }}
-        {% endfor %}
-    <button type="submit">Post</button>
-    </form>
-</div>
-</body>
-</html>
+    <div class='container-lg' style="margin-top: 30px;">
+        <div class="row justify-content-center align-items-center my-3 g-5">
+            <div class="col-lg-6 text-center d-lg-block" style="max-width: 50rem; width: 100%">
+                <div class="card bg-white shadow rounded border-0">
+                    <div class="card-header">
+                        <h3>Create Post</h3>
+                    </div>
+                    <div class="card-body text-center text-md-start px-4">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload Photo</label>
+                                <input class="form-control" type="file" id="formFile" name="image">
+                            </div>
+                            <div class="my-2">
+                                <label for="postText" class="form-label">Share your experience</label>
+                                {{ form.text }}
+                            </div>
+
+                            {% for error in form.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
+                            <div class="rate">
+                                <input type="radio" id="star5" name="rate" value="5"/>
+                                <label for="star5" title="text">5 stars</label>
+                                <input type="radio" id="star4" name="rate" value="4"/>
+                                <label for="star4" title="text">4 stars</label>
+                                <input type="radio" id="star3" name="rate" value="3"/>
+                                <label for="star3" title="text">3 stars</label>
+                                <input type="radio" id="star2" name="rate" value="2"/>
+                                <label for="star2" title="text">2 stars</label>
+                                <input type="radio" id="star1" name="rate" value="1"/>
+                                <label for="star1" title="text">1 star</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 my-3">Post</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End register form -->
+        </div>
+    </div>
+
+{% endblock page-content %}
+
