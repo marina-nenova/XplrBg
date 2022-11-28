@@ -21,7 +21,7 @@ class CreatePostView(LoginRequiredMixin, views.CreateView):
         form.instance.location = location
         location_rating = form.data.get('rate', None)
         if location_rating:
-            rate_location(self.request, location_rating, self.kwargs['loc_pk'])
+            rate_location(self.request, location_rating, location)
         form.save()
         return super().form_valid(form)
 

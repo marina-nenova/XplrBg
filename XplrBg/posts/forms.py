@@ -19,6 +19,10 @@ class PostCreateForm(SetFieldsClassFormMixin, forms.ModelForm):
         }
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].required = False
+
 
 class PostEditForm(SetFieldsClassFormMixin, forms.ModelForm):
     UPLOAD_FOLDER = 'XplrBg/Posts/Images'
@@ -33,3 +37,7 @@ class PostEditForm(SetFieldsClassFormMixin, forms.ModelForm):
             'folder': UPLOAD_FOLDER,
         }
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].required = False

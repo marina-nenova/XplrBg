@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-
+from django.views import generic as views
 from XplrBg.common.models import Wishlist, VisitedLocations
 from XplrBg.locations.models import Location
 from XplrBg.posts.models import Post
@@ -15,7 +15,14 @@ def show_index(request):
         'all_users': all_users,
         'posts': posts
     }
-    return render(request, 'home.html', context)
+    return render(request, 'feed.html', context)
+
+
+class ShowAllPosts(views.ListView):
+    model = Post
+    template_name = 'feed.html'
+    ordering = ('-updated_on',)
+
 
 
 @login_required
@@ -30,7 +37,8 @@ def add_to_wishlist(request, loc_pk):
 
 
 def remove_from_wishlist(current_user, location):
-    Wishlist.objects.get(user=current_user, locations=location).delete()
+    if Wishlist.objects.filter(user=current_user, locations=location):
+        Wishlist.objects.get(user=current_user, locations=location).delete()
 
 
 @login_required
