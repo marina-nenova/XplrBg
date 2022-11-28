@@ -76,7 +76,7 @@ class Location(AuditInfoMixin, models.Model):
         return Rating.objects.filter(location=self).aggregate(Avg("rating"))["rating__avg"] or 0
 
     def __str__(self):
-        return f"{self.name}: {self.average_rating()}"
+        return f"{self.name}"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -90,8 +90,8 @@ class LocationImage(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name="location_images")
     image = CloudinaryField(
         'image',
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     is_feature = models.BooleanField(

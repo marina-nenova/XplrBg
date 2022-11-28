@@ -8,6 +8,5 @@ urlpatterns = [
     path('', include('XplrBg.common.urls')),
     path('accounts/', include('XplrBg.accounts.urls')),
     path('locations/', include('XplrBg.locations.urls')),
-    path('albums/', include('XplrBg.albums.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

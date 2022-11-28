@@ -66,3 +66,21 @@ class UserProfileEditView(LoginRequiredMixin, views.UpdateView):
         })
 
 
+class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
+    template_name = 'profiles/users-visited-locations.html'
+
+    def get_queryset(self):
+        visited_locations = Location.objects.filter(visitedlocations__user=self.kwargs['pk']).prefetch_related('location_images')
+        for location in visited_locations:
+            location.feature_image = location.location_images.get(is_feature=True)
+        return visited_locations
+
+
+class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
+    template_name = 'profiles/users-wishlist-locations.html'
+
+    def get_queryset(self):
+        wishlist_locations = Location.objects.filter(wishlist__user=self.kwargs['pk']).prefetch_related('location_images')
+        for location in wishlist_locations:
+            location.feature_image = location.location_images.get(is_feature=True)
+        return wishlist_locations
