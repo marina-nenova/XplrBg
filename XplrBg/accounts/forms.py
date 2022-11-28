@@ -4,11 +4,12 @@ from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from XplrBg.accounts.models import UserProfile
+from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin
 
 UserModel = get_user_model()
 
 
-class UserRegistrationForm(UserCreationForm):
+class UserRegistrationForm(SetFieldsClassFormMixin, UserCreationForm):
     error_messages = {
         'password_mismatch': "The passwords don't match",
     }
@@ -27,10 +28,6 @@ class UserRegistrationForm(UserCreationForm):
             'password2': 'Repeat Password',
         }
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for _, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
 
 
 class UserLoginForm(AuthenticationForm):
@@ -53,7 +50,7 @@ class UserLoginForm(AuthenticationForm):
         return super().clean()
 
 
-class ProfileEditForm(forms.ModelForm):
+class ProfileEditForm(SetFieldsClassFormMixin, forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('profile_image', 'first_name', 'last_name', 'lives_at')
@@ -66,7 +63,3 @@ class ProfileEditForm(forms.ModelForm):
         }
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'

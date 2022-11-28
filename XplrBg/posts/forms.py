@@ -1,10 +1,11 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 
+from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin
 from XplrBg.posts.models import Post
 
 
-class PostCreateForm(forms.ModelForm):
+class PostCreateForm(SetFieldsClassFormMixin, forms.ModelForm):
     UPLOAD_FOLDER = 'XplrBg/Posts/Images'
 
     class Meta:
@@ -17,8 +18,3 @@ class PostCreateForm(forms.ModelForm):
             'folder': UPLOAD_FOLDER,
         }
     )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'

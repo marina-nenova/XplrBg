@@ -39,7 +39,7 @@ class ShowAllLocations(LoginRequiredMixin, views.ListView):
         return query
 
 
-class LocationDetails(views.DetailView):
+class LocationDetails(LoginRequiredMixin, views.DetailView):
     pass
     model = Location
     template_name = 'locations/location-details.html'
