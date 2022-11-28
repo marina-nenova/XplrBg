@@ -4,12 +4,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from XplrBg.common.models import Wishlist, VisitedLocations
 from XplrBg.locations.models import Location
+from XplrBg.posts.models import Post
 
 UserModel = get_user_model()
 
 def show_index(request):
+    all_users = UserModel.objects.all()
+    posts = Post.objects.all()
     context={
-        'all_users': UserModel.objects.all()
+        'all_users': all_users,
+        'posts': posts
     }
     return render(request, 'home.html', context)
 

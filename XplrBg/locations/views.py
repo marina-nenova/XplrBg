@@ -52,7 +52,6 @@ class LocationDetails(LoginRequiredMixin, views.DetailView):
         return context
 
 
-def rate_location(request, rating: int, loc_pk):
-    location = Location.objects.get(id=loc_pk)
+def rate_location(request, rating: int, location):
     Rating.objects.filter(location=location, user=request.user).delete()
     location.rating_set.create(user=request.user, rating=rating)

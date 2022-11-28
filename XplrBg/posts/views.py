@@ -4,7 +4,7 @@ from django.views import generic as views
 
 from XplrBg.locations.models import Location
 from XplrBg.locations.views import rate_location
-from XplrBg.posts.forms import PostCreateForm
+from XplrBg.posts.forms import PostCreateForm, PostEditForm
 from XplrBg.posts.models import Post
 
 
@@ -25,3 +25,16 @@ class CreatePostView(LoginRequiredMixin, views.CreateView):
         form.save()
         return super().form_valid(form)
 
+
+class EditPostView(LoginRequiredMixin, views.UpdateView):
+    model = Post
+    form_class = PostEditForm
+    template_name = 'posts/edit-post.html'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        location_rating = form.data.get('rate', None)
+        if location_rating:
+            rate_location(self.request, location_rating, self.object.location)
+        form.save()
+        return super().form_valid(form)
