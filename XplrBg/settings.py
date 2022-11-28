@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'XplrBg.accounts',
     'XplrBg.common',
     'XplrBg.locations',
+    'XplrBg.posts',
 
     #Third-party-apps
     'cloudinary',
