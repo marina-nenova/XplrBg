@@ -20,7 +20,7 @@
                             {% csrf_token %}
                             <div class="mb-3">
                                 <label for="formFile" class="form-label">Upload Photo</label>
-                                <input class="form-control" type="file" id="formFile" name="image">
+                                {{form.image}}
                             </div>
                             <div class="my-2">
                                 <label for="postText" class="form-label">Share your experience</label>

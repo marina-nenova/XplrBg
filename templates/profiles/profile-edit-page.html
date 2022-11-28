@@ -23,14 +23,14 @@
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Profile Picture</label>
-                            <input class="form-control" type="file" id="formFile" name="profile_image">
+                            {{form.profile_image}}
                         </div>
 
-                            {% for error in form.errors %}
-                                <div>
-                                    <small class="text-danger m-0">{{ error }}</small>
-                                </div>
-                            {% endfor %}
+{#                            {% for error in form.errors %}#}
+{#                                <div>#}
+{#                                    <small class="text-danger m-0">{{ error }}</small>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
 
                         <div class="mb-1" >
                             <label for="firstName" class="form-label">First Name</label>
