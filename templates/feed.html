@@ -12,13 +12,13 @@
                         <form class="d-flex search-bar" role="search" method="GET">
                             <input class="form-control me-2 rounded-pill search-input bg-gray border-0" type="search"
                                    name="query"
-                                   placeholder="Search" aria-label="Search">
+                                   placeholder="Search posts by location" aria-label="Search">
                         </form>
                     </div>
 
                     {% for post in object_list %}
                         <!-- Posts -->
-                        <div class="bg-white p-4 rounded shadow mt-3">
+                        <div class="bg-white p-4 rounded shadow mt-3" id="post-{{ post.id }}">
                             <!-- Author -->
                             <div class="d-flex justify-content-between">
                                 <!-- avatar -->
@@ -73,10 +73,16 @@
                                     <!-- likes -->
                                     <div class="d-flex align-items-center position-absolute top-0 start-0"
                                          style="height:50px; z-index:5">
+                                        {% if not post.liked_by_user %}
                                         <div class="me-2">
-                                            <i class="fas fa-thumbs-up fs-4 text-primary"></i>
+                                            <i class="fa-regular fa-thumbs-up fs-4 text-primary"></i>
                                         </div>
-                                        <p class="m-0 text-muted fs-7">3 likes</p>
+                                        {% else %}
+                                        <div class="me-2">
+                                            <i class="fa-solid fa-thumbs-up fs-4 text-primary"></i>
+                                        </div>
+                                        {% endif %}
+                                        <p class="m-0 text-muted fs-7">{{ post.likes_count }} likes</p>
                                     </div>
 
                                     <!-- Comments start -->
@@ -93,11 +99,11 @@
                                             <!-- comment and likes bar -->
                                             <div class="d-flex justify-content-around">
                                                 <!-- Like -->
-                                                <div class="d-flex align-items-center justify-content-center rounded text-muted p-1"
+                                                <a href="{% url 'like post' post_pk=post.pk %}" class="d-flex align-items-center justify-content-center rounded text-muted text-decoration-none p-1"
                                                      type="button">
                                                     <i class="fas fa-thumbs-up me-3"></i>
                                                     <p class="m-0">Like</p>
-                                                </div>
+                                                </a>
 
                                                 <!-- Comment -->
                                                 <div class="d-flex align-items-center justify-content-center rounded text-muted p-1"
