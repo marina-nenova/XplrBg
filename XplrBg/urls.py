@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('XplrBg.common.urls')),
     path('accounts/', include('XplrBg.accounts.urls')),
     path('locations/', include('XplrBg.locations.urls')),
-    path('posts/', include('XplrBg.posts.urls'))
+    path('posts/', include('XplrBg.posts.urls')),
+    path('posts-common/', include('XplrBg.posts_common.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
