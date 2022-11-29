@@ -56,7 +56,7 @@
                                     </div>
 
                                     <div class="card-footer">
-                                        {% if location not in visited_locations %}
+                                        {% if not location in visited_locations %}
                                             <div
                                                     class="d-flex align-items-center justify-content-between rounded text-muted p-1">
                                                 <a href="{% url 'mark as visited' location.pk %}" class="tt"

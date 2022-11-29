@@ -1,6 +1,6 @@
 from django.urls import path
 
-from XplrBg.common.views import show_index, add_to_wishlist, mark_as_visited, ShowAllPosts
+from XplrBg.common.views import add_to_wishlist, mark_as_visited, ShowAllPosts
 
 urlpatterns = (
     path('', ShowAllPosts.as_view(), name='home'),

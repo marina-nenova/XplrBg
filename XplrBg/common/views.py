@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.views import generic as views
 from XplrBg.common.models import Wishlist, VisitedLocations
 from XplrBg.core.utils.posts_utils import apply_likes_count, apply_post_liked_by_users
@@ -10,15 +10,6 @@ from XplrBg.posts.models import Post
 
 
 UserModel = get_user_model()
-
-def show_index(request):
-    all_users = UserModel.objects.all()
-    posts = Post.objects.all()
-    context={
-        'all_users': all_users,
-        'posts': posts
-    }
-    return render(request, 'feed.html', context)
 
 
 class ShowAllPosts(LoginRequiredMixin, views.ListView):

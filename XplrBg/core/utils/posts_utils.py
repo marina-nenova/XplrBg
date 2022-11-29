@@ -21,3 +21,4 @@ def apply_post_liked_by_users(post, user):
 
     post.liked_by_user = True if post_liked_by_user else False
     return post
+

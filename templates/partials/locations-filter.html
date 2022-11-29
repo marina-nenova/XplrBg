@@ -1,7 +1,7 @@
 <div class="card mb-2 border-0 shadow">
     <article class="card-group-item">
         <a href="{% url 'all locations' %}">
-            <h6 class="text-decoration-none">
+            <h6 class="text-decoration-none ms-3">
                 Show All
             </h6>
         </a>
@@ -22,6 +22,7 @@
         </div>
     </article>
 
+<form method="GET">
     <article class="card-group-item">
         <header class="card-header">
             <h6 class="title">Filter By </h6>
@@ -31,17 +32,19 @@
         </header>
         <div class="filter-content">
             <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    {% for category in location_categories %}
-                        <li class="list-group-item">
-                            <a href="{% url 'all locations' %}?q={{ category.category_name }}"
-                               class="text-decoration-none text-primary">{{ category.category_name }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                {% for category in location_categories %}
+                    <label class="form-check">
+
+                        <input class="form-check-input" type="checkbox" value="{{ category }}" name="categories">
+                        <p class="form-check-label">
+                            {{ category }}
+                        </p>
+                    </label>
+
+                {% endfor %}
+            </div> <!-- card-body.// -->
         </div>
-    </article>
+    </article> <!-- card-group-item.// -->
 
     <article class="card-group-item">
         <header class="card-header mt-1">
@@ -49,15 +52,20 @@
         </header>
         <div class="filter-content">
             <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    {% for region in location_regions %}
-                        <li class="list-group-item">
-                            <a href="{% url 'all locations' %}?q={{ region.region }}"
-                               class="text-decoration-none text-primary">{{ region.region }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                {% for region in location_regions %}
+                    <label class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{ region }}" name="regions">
+                        <p class="form-check-label">
+                            {{ region }}
+                        </p>
+                    </label>
+
+                {% endfor %}
+            </div> <!-- card-body.// -->
         </div>
-    </article>
+    </article> <!-- card-group-item.// -->
+
+    <button class="btn btn-outline-secondary rounded-pill w-100" type="submit">Filter</button>
+
+    </form>
 </div>
