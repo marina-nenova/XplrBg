@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic as views
 from XplrBg.common.models import Wishlist, VisitedLocations
@@ -18,7 +19,7 @@ def show_index(request):
     return render(request, 'feed.html', context)
 
 
-class ShowAllPosts(views.ListView):
+class ShowAllPosts(LoginRequiredMixin, views.ListView):
     model = Post
     template_name = 'feed.html'
     ordering = ('-updated_on',)
