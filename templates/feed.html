@@ -65,7 +65,7 @@
                                 <div>
                                     <p>{{ post.text }}</p>
                                     {% if post.image %}
-                                    <img src="{{ post.image.url }}" alt="post-image" class="img-fluid">
+                                        <img src="{{ post.image.url }}" alt="post-image" class="img-fluid">
                                     {% endif %}
                                 </div>
                                 <!-- likes and comments -->
@@ -74,13 +74,13 @@
                                     <div class="d-flex align-items-center position-absolute top-0 start-0"
                                          style="height:50px; z-index:5">
                                         {% if not post.liked_by_user %}
-                                        <div class="me-2">
-                                            <i class="fa-regular fa-thumbs-up fs-4 text-primary"></i>
-                                        </div>
+                                            <div class="me-2">
+                                                <i class="fa-regular fa-thumbs-up fs-4 text-primary"></i>
+                                            </div>
                                         {% else %}
-                                        <div class="me-2">
-                                            <i class="fa-solid fa-thumbs-up fs-4 text-primary"></i>
-                                        </div>
+                                            <div class="me-2">
+                                                <i class="fa-solid fa-thumbs-up fs-4 text-primary"></i>
+                                            </div>
                                         {% endif %}
                                         <p class="m-0 text-muted fs-7">{{ post.likes_count }} likes</p>
                                     </div>
@@ -91,7 +91,8 @@
                                             <!-- comment collapse -->
                                             <h2 class="accordion-header" id="headingOne">
                                                 <div class="accordion-button collapsed d-flex justify-content-end"
-                                                     type="button" data-bs-toggle="collapse" data-bs-target="#post{{ post.pk }}"
+                                                     type="button" data-bs-toggle="collapse"
+                                                     data-bs-target="#post{{ post.pk }}"
                                                      aria-expanded="true" aria-controls="post{{ post.pk }}">
                                                     <p class="m-0">2 comments</p>
                                                 </div>
@@ -99,15 +100,17 @@
                                             <!-- comment and likes bar -->
                                             <div class="d-flex justify-content-around">
                                                 <!-- Like -->
-                                                <a href="{% url 'like post' post_pk=post.pk %}" class="d-flex align-items-center justify-content-center rounded text-muted text-decoration-none p-1"
-                                                     type="button">
+                                                <a href="{% url 'like post' post_pk=post.pk %}"
+                                                   class="d-flex align-items-center justify-content-center rounded text-muted text-decoration-none p-1"
+                                                   type="button">
                                                     <i class="fas fa-thumbs-up me-3"></i>
                                                     <p class="m-0">Like</p>
                                                 </a>
 
                                                 <!-- Comment -->
                                                 <div class="d-flex align-items-center justify-content-center rounded text-muted p-1"
-                                                     type="button" data-bs-toggle="collapse" data-bs-target="#post{{ post.pk }}"
+                                                     type="button" data-bs-toggle="collapse"
+                                                     data-bs-target="#post{{ post.pk }}"
                                                      aria-expanded="true" aria-controls="post{{ post.pk }}">
                                                     <i class="fas fa-comment-alt me-3"></i>
                                                     <p class="m-0">Comment</p>
@@ -118,89 +121,77 @@
                                                  aria-labelledby="headingOne"
                                                  data-bs-parent="#comments">
                                                 <div class="accordion-body">
-                                                    <!-- comment 1 -->
-                                                    <div class="d-flex align-items-center my-1">
-                                                        <!-- Avatar -->
-                                                        <img src="./styles/images/profile_photo.jpg" alt="avatar"
-                                                             class="avatar rounded-circle me-2">
-                                                        <!-- comment text -->
-                                                        <div class="p-3 rounded w-100 comment__input">
-                                                            <!-- menu -->
-                                                            <div class="d-flex justify-content-end">
-                                                                <i class="fas fa-ellipsis-h" type="button"
-                                                                   data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                                                <!-- Edit comment menu -->
-                                                                <ul class="dropdown-menu border-0 shadow"
-                                                                    aria-labelledby="post1Menu">
-                                                                    <li class="d-flex align-items-center">
-                                                                        <a href=""
-                                                                           class="dropdown-item d-flex align-items-center justify-content-start fs-7">
-                                                                            Edit comment
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="d-flex align-items-center">
-                                                                        <a href=""
-                                                                           class="dropdown-item d-flex align-items-center justify-content-start fs-7">
-                                                                            Delete comment
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                                    {% for comment in post.postcomment_set.all %}
+                                                        <!-- comment 1 -->
+                                                        <div class="d-flex align-items-center my-1">
+                                                            <!-- Avatar -->
+                                                            {% if comment.user.user_profile.profile_image %}
+                                                                <img src="{{ comment.user.user_profile.profile_image.url }}"
+                                                                     alt="avatar"
+                                                                     class="avatar rounded-circle me-2">
+                                                            {% else %}
+                                                                <img
+                                                                        src="{% static 'images/profile-default_image.webp' %}"
+                                                                        alt="default-image"
+                                                                        class="avatar rounded-circle me-2">
 
-                                                            <!-- text -->
-                                                            <p class="fw-bold m-0">John</p>
-                                                            <p class="m-0 fs-7 p-2 rounded bg-gray">Lorem ipsum dolor
-                                                                sit
-                                                                amet consectetur, adipisicing elit.</p>
-                                                        </div>
-                                                    </div>
-                                                    <!-- comment 2 -->
-                                                    <div class="d-flex align-items-center my-1">
-                                                        <!-- Avatar -->
-                                                        <img src="./styles/images/profile_photo.jpg" alt="avatar"
-                                                             class="avatar rounded-circle me-2">
-                                                        <!-- comment text -->
-                                                        <div class="p-3 rounded w-100 comment__input">
-                                                            <!-- menu -->
-                                                            <div class="d-flex justify-content-end">
-                                                                <i class="fas fa-ellipsis-h" type="button"
-                                                                   data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                                                <!-- Edit comment menu -->
-                                                                <ul class="dropdown-menu border-0 shadow"
-                                                                    aria-labelledby="post1Menu">
-                                                                    <li class="d-flex align-items-center">
-                                                                        <a href=""
-                                                                           class="dropdown-item d-flex align-items-center justify-content-start fs-7">
-                                                                            Edit comment
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="d-flex align-items-center">
-                                                                        <a href=""
-                                                                           class="dropdown-item d-flex align-items-center justify-content-start fs-7">
-                                                                            Delete comment
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
+                                                            {% endif %}
+                                                            <!-- comment text -->
+                                                            <div class="p-3 rounded w-100 comment__input">
+                                                                <!-- menu -->
+                                                                <div class="d-flex justify-content-end">
+                                                                    <i class="fas fa-ellipsis-h" type="button"
+                                                                       data-bs-toggle="dropdown"
+                                                                       aria-expanded="false"></i>
+                                                                    <!-- Edit comment menu -->
+                                                                    <ul class="dropdown-menu border-0 shadow"
+                                                                        aria-labelledby="post1Menu">
+                                                                        <li class="d-flex align-items-center">
+                                                                            <a href=""
+                                                                               class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                                                                Edit comment
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="d-flex align-items-center">
+                                                                            <a href=""
+                                                                               class="dropdown-item d-flex align-items-center justify-content-start fs-7">
+                                                                                Delete comment
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
 
-                                                            <!-- text -->
-                                                            <p class="fw-bold m-0">John</p>
-                                                            <p class="m-0 fs-7 p-2 rounded bg-gray">Lorem ipsum dolor
-                                                                sit
-                                                                amet consectetur, adipisicing elit.</p>
+                                                                <!-- text -->
+                                                                <p class="fw-bold m-0">{{ comment.user.user_profile.get_full_name }}</p>
+                                                                <p class="m-0 fs-7 p-2 rounded bg-gray">{{ comment.text }}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    {% endfor %}
                                                     <!-- create comment -->
-                                                    <form action="" class="d-flex my-1">
+                                                    <form action="{% url 'comment post' post_pk=post.pk %}"
+                                                          method="POST" class="d-flex my-1">
+                                                        {% csrf_token %}
                                                         <!-- avatar -->
-                                                        <div>
-                                                            <img src="./styles/images/profile_photo.jpg" alt="avatar"
+                                                        {% if comment.user.user_profile.profile_image %}
+                                                            <img src="{{ comment.user.user_profile.profile_image.url }}"
+                                                                 alt="avatar"
                                                                  class="avatar rounded-circle me-2">
-                                                        </div>
+                                                        {% else %}
+                                                            <img
+                                                                    src="{% static 'images/profile-default_image.webp' %}"
+                                                                    alt="default-image"
+                                                                    class="avatar rounded-circle me-2">
+
+                                                        {% endif %}
+
                                                         <!-- input -->
-                                                        <input type="text"
-                                                               class="form-control border-0 rounded-pill post-input bg-gray"
-                                                               placeholder="Write a comment"/>
+                                                        {#                                                         <input type="text" maxlength="30" name="text"#}
+                                                        {#                                                        class="form-control border-0 rounded-pill post-input bg-gray"#}
+                                                        {#                                                        placeholder="Write a comment" />#}
+                                                        {% for field in form %}
+                                                            {{ field.text }}
+                                                        {% endfor %}
+
                                                     </form>
                                                 </div>
                                             </div>

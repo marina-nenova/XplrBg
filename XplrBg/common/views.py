@@ -7,7 +7,7 @@ from XplrBg.common.models import Wishlist, VisitedLocations
 from XplrBg.core.utils.posts_utils import apply_likes_count, apply_post_liked_by_users
 from XplrBg.locations.models import Location
 from XplrBg.posts.models import Post
-
+from XplrBg.posts_common.forms import PostCommentForm
 
 UserModel = get_user_model()
 
@@ -19,6 +19,7 @@ class ShowAllPosts(LoginRequiredMixin, views.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowAllPosts, self).get_context_data(object_list=None, **kwargs)
+        context['form'] = PostCommentForm(),
         return context
 
     def get_queryset(self):
