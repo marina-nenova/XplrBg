@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block page-content %}
+
+    <div class='container-lg' style="margin-top: 30px;">
+        <div class="row justify-content-center align-items-center my-3 g-5">
+            <div class="col-lg-6 text-center d-lg-block" style="max-width: 50rem; width: 100%">
+                <div class="card bg-white shadow rounded border-0">
+                    <div class="card-header">
+                        <h3>Delete Post</h3>
+                    </div>
+                    <div class="card-body text-center text-md-start px-4">
+
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+
+                            <label for="postText" class="form-label d-flex justify-content-center">Are you sure you want
+                                to delete this post?</label>
+                            <div class="d-flex justify-content-around">
+                                <a href="{% url 'go back' %}" type="button"
+                                   class="btn btn-primary my-3">Cancel</a>
+                                <button type="submit" class="btn btn-danger my-3">Delete</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End register form -->
+        </div>
+    </div>
+
+{% endblock page-content %}
+

@@ -50,7 +50,7 @@
                                             </a>
                                         </li>
                                         <li class="d-flex align-items-center">
-                                            <a href=""
+                                            <a href="{% url 'delete post' pk=post.pk %}"
                                                class="dropdown-item d-flex align-items-center justify-content-start fs-7">
                                                 Delete Post
                                             </a>
@@ -94,7 +94,7 @@
                                                      type="button" data-bs-toggle="collapse"
                                                      data-bs-target="#post{{ post.pk }}"
                                                      aria-expanded="true" aria-controls="post{{ post.pk }}">
-                                                    <p class="m-0">2 comments</p>
+                                                    <p class="m-0">{{ post.postcomment_set.count }} comments</p>
                                                 </div>
                                             </h2>
                                             <!-- comment and likes bar -->

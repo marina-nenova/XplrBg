@@ -1,7 +1,7 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 
-from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin
+from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin, DisabledFormMixin
 from XplrBg.posts.models import Post
 
 
@@ -41,3 +41,9 @@ class PostEditForm(SetFieldsClassFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['image'].required = False
+
+
+class PostDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ()

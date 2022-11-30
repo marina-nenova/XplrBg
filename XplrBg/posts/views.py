@@ -4,7 +4,7 @@ from django.views import generic as views
 
 from XplrBg.locations.models import Location
 from XplrBg.locations.views import rate_location
-from XplrBg.posts.forms import PostCreateForm, PostEditForm
+from XplrBg.posts.forms import PostCreateForm, PostEditForm, PostDeleteForm
 from XplrBg.posts.models import Post
 
 
@@ -38,3 +38,10 @@ class EditPostView(LoginRequiredMixin, views.UpdateView):
             rate_location(self.request, location_rating, self.object.location)
         form.save()
         return super().form_valid(form)
+
+
+class DeletePostView(LoginRequiredMixin, views.DeleteView):
+    model = Post
+    form_class = PostDeleteForm
+    template_name = 'posts/delete-post.html'
+    success_url = reverse_lazy('home')
