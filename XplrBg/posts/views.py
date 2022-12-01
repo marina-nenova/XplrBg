@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 
+from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin
 from XplrBg.locations.models import Location
 from XplrBg.locations.views import rate_location
 from XplrBg.posts.forms import PostCreateForm, PostEditForm, PostDeleteForm
@@ -26,7 +27,7 @@ class CreatePostView(LoginRequiredMixin, views.CreateView):
         return super().form_valid(form)
 
 
-class EditPostView(LoginRequiredMixin, views.UpdateView):
+class EditPostView(LoginRequiredMixin, AuthorizationRequiredMixin, views.UpdateView):
     model = Post
     form_class = PostEditForm
     template_name = 'posts/edit-post.html'
@@ -40,7 +41,7 @@ class EditPostView(LoginRequiredMixin, views.UpdateView):
         return super().form_valid(form)
 
 
-class DeletePostView(LoginRequiredMixin, views.DeleteView):
+class DeletePostView(LoginRequiredMixin, AuthorizationRequiredMixin, views.DeleteView):
     model = Post
     form_class = PostDeleteForm
     template_name = 'posts/delete-post.html'

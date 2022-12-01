@@ -1,6 +1,6 @@
 import cloudinary.uploader
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 from .models import UserProfile
 
@@ -26,3 +26,15 @@ def deleting_old_profile_pic_on_update(sender, instance, **kwargs):
             new_profile_image = instance.profile_image
             if old_profile_image and old_profile_image.url != new_profile_image.url:
                 cloudinary.uploader.destroy(old_profile_image.public_id)
+
+
+@receiver(post_delete, sender=UserProfile)
+def deleting_profile_pic_on_delete_profile(sender, instance, **kwargs):
+    if instance.profile_image:
+        cloudinary.uploader.destroy(instance.profile_image.public_id)
+
+
+@receiver(post_delete, sender=UserProfile)
+def deleting_user_on_delete_profile(sender, instance, **kwargs):
+    user = instance.user
+    user.delete()

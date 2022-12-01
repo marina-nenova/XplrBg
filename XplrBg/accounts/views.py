@@ -5,7 +5,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEditForm
+from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEditForm, ProfileDeleteForm
 from XplrBg.accounts.models import UserProfile
 from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin
 from XplrBg.core.utils.locations_ustils import get_location_feature_image
@@ -62,13 +62,12 @@ class UserProfileEditView(LoginRequiredMixin, AuthorizationRequiredMixin, views.
             'pk': self.request.user.pk,
         })
 
-    # def get_object(self, queryset=None):
-    #     return UserProfile.objects.get(pk=self.request.user.pk)
 
-    # def test_func(self):
-    #     user_profile = self.get_object()
-    #     return self.request.user == user_profile.user
-
+class UserProfileDeleteView(LoginRequiredMixin, AuthorizationRequiredMixin, views.DeleteView):
+    template_name = 'profiles/profile-delete.html'
+    model = UserProfile
+    form_class = ProfileDeleteForm
+    success_url = reverse_lazy('home')
 
 
 class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):

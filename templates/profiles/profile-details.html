@@ -25,17 +25,24 @@
                             <div class="col-md-9">
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
-                                        {% if object.first_name and object.last_name %}
-                                            <h1 class="card-title text-md-center">{{ object.get_full_name }}</h1>
-                                        {% else %}
-                                            <h1 class="card-title text-md-center">{{ object.user }}</h1>
-                                        {% endif %}
-                                        <!-- Edit profile button -->
-                                        {% if is_owner %}
-                                            <a href="{% url 'edit profile' pk=object.pk %}">
-                                                <i class="fa-solid fa-pen-to-square fs-2 text-muted"></i>
-                                            </a>
-                                        {% endif %}
+                                        <div>
+                                            {% if object.first_name and object.last_name %}
+                                                <h1 class="card-title text-md-center">{{ object.get_full_name }}</h1>
+                                            {% else %}
+                                                <h1 class="card-title text-md-center">{{ object.user }}</h1>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            <!-- Edit profile button -->
+                                            {% if is_owner %}
+                                                <a href="{% url 'edit profile' pk=object.pk %}" class="text-muted text-decoration-none me-4" >
+                                                    <i class="fa-solid fa-pen-to-square fs-2"></i>
+                                                </a>
+                                                <a href="{% url 'delete profile' pk=object.pk %}" class=" text-muted text-decoration-none">
+                                                    <i class="fa-solid fa-trash fs-2"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
                                     </div>
 
                                     <p class="card-text">
@@ -57,7 +64,8 @@
                                         <a class="nav-link" href="#">Posts</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'user visited locations' pk=object.pk %}">Visited locations</a>
+                                        <a class="nav-link" href="{% url 'user visited locations' pk=object.pk %}">Visited
+                                            locations</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'user wishlist locations' pk=object.pk %}">Wishlist</a>
