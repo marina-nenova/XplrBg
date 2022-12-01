@@ -1,12 +1,13 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth import views as auth_views
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views import generic as views
 
 from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEditForm
 from XplrBg.accounts.models import UserProfile
+from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin
 from XplrBg.core.utils.locations_ustils import get_location_feature_image
 from XplrBg.core.utils.utils import is_owner
 from XplrBg.locations.models import Location
@@ -51,7 +52,7 @@ class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
         return context
 
 
-class UserProfileEditView(LoginRequiredMixin, views.UpdateView):
+class UserProfileEditView(LoginRequiredMixin, AuthorizationRequiredMixin, views.UpdateView):
     template_name = 'profiles/profile-edit-page.html'
     model = UserProfile
     form_class = ProfileEditForm
@@ -60,6 +61,14 @@ class UserProfileEditView(LoginRequiredMixin, views.UpdateView):
         return reverse_lazy('details profile', kwargs={
             'pk': self.request.user.pk,
         })
+
+    # def get_object(self, queryset=None):
+    #     return UserProfile.objects.get(pk=self.request.user.pk)
+
+    # def test_func(self):
+    #     user_profile = self.get_object()
+    #     return self.request.user == user_profile.user
+
 
 
 class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):

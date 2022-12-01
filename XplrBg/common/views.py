@@ -41,25 +41,25 @@ class ShowAllPosts(LoginRequiredMixin, views.ListView):
 @login_required
 def add_to_wishlist(request, loc_pk):
     location = get_object_or_404(Location, id=loc_pk)
-    if Wishlist.objects.filter(user_id=request.user.id, locations_id=loc_pk).exists():
+    if Wishlist.objects.filter(user_id=request.user.id, location_id=loc_pk).exists():
         remove_from_wishlist(request.user, location)
     else:
-        Wishlist.objects.create(user_id=request.user.id, locations_id=location.id)
+        Wishlist.objects.create(user_id=request.user.id, location_id=location.id)
 
     return redirect(request.META["HTTP_REFERER"] + f'#{loc_pk}')
 
 
 def remove_from_wishlist(current_user, location):
-    if Wishlist.objects.filter(user=current_user, locations=location):
-        Wishlist.objects.get(user=current_user, locations=location).delete()
+    if Wishlist.objects.filter(user=current_user, location=location):
+        Wishlist.objects.get(user=current_user, location=location).delete()
 
 
 @login_required
 def mark_as_visited(request, loc_pk):
     location = get_object_or_404(Location, id=loc_pk)
 
-    if not VisitedLocations.objects.filter(user_id=request.user.id, locations_id=loc_pk).exists():
-        VisitedLocations.objects.create(locations_id=location.id, user_id=request.user.id)
+    if not VisitedLocations.objects.filter(user_id=request.user.id, location_id=loc_pk).exists():
+        VisitedLocations.objects.create(location_id=location.id, user_id=request.user.id)
         remove_from_wishlist(request.user, location)
 
     return redirect(request.META["HTTP_REFERER"] + f'#{loc_pk}')
