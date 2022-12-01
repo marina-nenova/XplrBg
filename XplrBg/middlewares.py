@@ -1,4 +1,4 @@
-from XplrBg.core.utils.errors import error404, error400, error403
+from XplrBg.core.utils.errors import error404, error400, error403, internal_server_error
 
 
 def handle_exception(get_response):
@@ -10,8 +10,8 @@ def handle_exception(get_response):
             return error403(request)
         if response.status_code == 404:
             return error404(request)
-        # elif response.status_code >= 500:
-        #     return internal_server_error(request)
+        elif response.status_code >= 500:
+            return internal_server_error(request)
         return response
 
     return middleware
