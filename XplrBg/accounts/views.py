@@ -41,7 +41,6 @@ class UserLogoutView(auth_views.LogoutView):
 class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
     template_name = 'profiles/profile-details.html'
     model = UserProfile
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         visited_locations_count = Location.objects.filter(visitedlocations__user_id=self.object.user_id).count()

@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,9 +6,17 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static '500-page.css' %}">
     <title>Document</title>
 </head>
 <body>
-<h1>SERVER ERROR :)</h1>
+<div class="error-500" data-text="Oh no! Our spaghetti code is not working properly. Don't worry, it's not your fault!">
+    <spaguetti>
+    <fork></fork>
+    <meat></meat>
+    <pasta></pasta>
+    <plate></plate>
+  </spaguetti>
+</div>
 </body>
 </html>
