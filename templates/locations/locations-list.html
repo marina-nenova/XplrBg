@@ -11,7 +11,7 @@
                     <div class="card-header d-lg-none">
                         <div type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu" aria-expanded="false"
                              aria-controls="collapseExample">
-                            <i class="fa-solid fa-filter"></i>
+                            <i class="fa-solid fa-filter fs-4 text-muted"></i>
                         </div>
                     </div>
                     <div class="collapse" id="filterMenu">
@@ -96,19 +96,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const rate = (rating, loc_id) => {
-            fetch(`/locations/rate/${rating}/${loc_pk}/`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(rest => {
-                window.location.reload();
-                // you may want to update the rating here
-                // to simplify stuff, I just reload the page
-            })
-        }
-    </script>
 {% endblock %}

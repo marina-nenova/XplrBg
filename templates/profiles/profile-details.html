@@ -26,19 +26,17 @@
                                 <div class="card-body">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            {% if object.first_name and object.last_name %}
-                                                <h1 class="card-title text-md-center">{{ object.get_full_name }}</h1>
-                                            {% else %}
-                                                <h1 class="card-title text-md-center">{{ object.user }}</h1>
-                                            {% endif %}
+                                            <h1 class="card-title text-md-center">{{ object.user.username }}</h1>
                                         </div>
                                         <div>
                                             <!-- Edit profile button -->
                                             {% if is_owner %}
-                                                <a href="{% url 'edit profile' pk=object.pk %}" class="text-muted text-decoration-none me-4" >
+                                                <a href="{% url 'edit profile' pk=object.pk %}"
+                                                   class="text-muted text-decoration-none me-4">
                                                     <i class="fa-solid fa-pen-to-square fs-2"></i>
                                                 </a>
-                                                <a href="{% url 'delete profile' pk=object.pk %}" class=" text-muted text-decoration-none">
+                                                <a href="{% url 'delete profile' pk=object.pk %}"
+                                                   class=" text-muted text-decoration-none">
                                                     <i class="fa-solid fa-trash fs-2"></i>
                                                 </a>
                                             {% endif %}

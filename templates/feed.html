@@ -34,7 +34,7 @@
 
                                         <p class="m-0 fw-bold">
                                             <a href="{% url 'details profile' pk=post.user.pk %}">
-                                                {{ post.user.user_profile.get_full_name }}
+                                                {{ post.user.username }}
                                                 </a>
                                             reviewed <a href="{% url 'location details' slug=post.location.slug %}">{{ post.location.name }}</a></p>
                                         <span class="text-muted fs-7">{{ post.updated_on|timesince }} ago</span>
@@ -166,7 +166,7 @@
                                                                 </div>
 
                                                                 <!-- text -->
-                                                                <p class="fw-bold m-0">{{ comment.user.user_profile.get_full_name }}</p>
+                                                                <p class="fw-bold m-0">{{ comment.user.username }}</p>
                                                                 <p class="m-0 fs-7 p-2 rounded bg-gray">{{ comment.text }}</p>
                                                             </div>
                                                         </div>
@@ -192,9 +192,7 @@
                                                         {#                                                         <input type="text" maxlength="30" name="text"#}
                                                         {#                                                        class="form-control border-0 rounded-pill post-input bg-gray"#}
                                                         {#                                                        placeholder="Write a comment" />#}
-                                                        {% for field in form %}
-                                                            {{ field.text }}
-                                                        {% endfor %}
+                                                        {{form.text}}
 
                                                     </form>
                                                 </div>

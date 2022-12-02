@@ -19,7 +19,7 @@ class ShowAllPosts(LoginRequiredMixin, views.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ShowAllPosts, self).get_context_data(object_list=None, **kwargs)
-        context['form'] = PostCommentForm(),
+        context['form'] = PostCommentForm()
         return context
 
     def get_queryset(self):

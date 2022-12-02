@@ -27,6 +27,13 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     objects = AppUserManager()
 
+    @property
+    def username(self):
+        if self.user_profile.first_name and self.user_profile.last_name:
+            return f'{self.user_profile.first_name} {self.user_profile.last_name}'
+        else:
+            return self.email
+
 
 class UserProfile(AuditInfoMixin, models.Model):
     FIRST_NAME_MAX_LENGTH = 30
@@ -76,4 +83,3 @@ class UserProfile(AuditInfoMixin, models.Model):
     @property
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
-

@@ -57,7 +57,7 @@
                             <i class="fa-solid fa-house-user fs-4 text-muted"></i>
                         </a>
                     </div>
-                    <!-- My Passports -->
+                    <!-- Locations -->
                     <div class="mx-4 nav__btn">
                         <a href="{% url 'all locations' %}" class="btn px-4 nav_button">
                             <i class="fa-solid fa-passport fs-4 text-muted"></i>
@@ -66,7 +66,7 @@
                     <!-- Want to visit -->
                     <div class="mx-4 nav__btn">
                         <button class="btn px-4 nav_button">
-                            <i class="fa-solid fa-heart fs-4 text-muted"></i>
+                            <i class="fa-solid fa-star fs-4 text-muted"></i>
                         </button>
                     </div>
 
@@ -88,7 +88,7 @@
                                         src="{% static 'images/profile-default_image.webp' %}" alt="default-image"
                                         class="avatar rounded-circle me-2">
                             {% endif %}
-                            <p class="username m-0">{{ request.user.user_profile.get_full_name }}</p>
+                            <p class="username m-0">{{ request.user.username }}</p>
                         </a>
                     </div>
                     <!-- Dropdown menu -->
@@ -121,25 +121,13 @@
                         </li>
 
                         <li class="my-2 p-1">
-                            <a href=""
+                            <a href="{% url 'all locations' %}"
                                class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
                                 <div class="p-2">
                                     <i class="fa-solid fa-passport fs-4 text-muted"></i>
                                 </div>
                                 <div>
-                                    <p class="m-0 text-muted">My Passports</p>
-                                </div>
-                            </a>
-                        </li>
-
-                        <li class="my-2 p-1">
-                            <a href=""
-                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
-                                <div class="p-2">
-                                    <i class="fa-solid fa-heart fs-4 text-muted"></i>
-                                </div>
-                                <div>
-                                    <p class="m-0 text-muted">Want to visit</p>
+                                    <p class="m-0 text-muted">Browse Locations</p>
                                 </div>
                             </a>
                         </li>
@@ -152,6 +140,30 @@
                                 </div>
                                 <div>
                                     <p class="m-0 text-muted">Top 10</p>
+                                </div>
+                            </a>
+                        </li>
+
+                                                <li class="my-2 p-1">
+                            <a href="{% url 'user visited locations' pk=request.user.pk %}"
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-circle-check fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">My Visited Locations</p>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="my-2 p-1">
+                            <a href="{% url 'user wishlist locations' pk=request.user.pk %}"
+                               class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
+                                <div class="p-2">
+                                    <i class="fa-solid fa-heart fs-4 text-muted"></i>
+                                </div>
+                                <div>
+                                    <p class="m-0 text-muted">My wishlist</p>
                                 </div>
                             </a>
                         </li>
