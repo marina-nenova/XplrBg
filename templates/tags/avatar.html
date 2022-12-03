@@ -1,0 +1,10 @@
+{% load static %}
+{% if profile.profile_image %}
+    <img
+            src="{{ profile.profile_image.url }}" alt="avatar"
+            class="avatar rounded-circle me-2">
+{% else %}
+    <img
+            src="{% static 'images/profile-default_image.webp' %}" alt="default-image"
+            class="avatar rounded-circle me-2">
+{% endif %}

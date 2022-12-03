@@ -1,3 +1,4 @@
+{% load tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -79,15 +80,7 @@
                     <div class="d-none d-xl-flex align-items-center justify-content-center">
                         <a href="{% url 'details profile' pk=request.user.pk %}"
                            class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
-                            {% if request.user.user_profile.profile_image %}
-                                <img
-                                        src="{{ request.user.user_profile.profile_image.url }}" alt="avatar"
-                                        class="avatar rounded-circle me-2">
-                            {% else %}
-                                <img
-                                        src="{% static 'images/profile-default_image.webp' %}" alt="default-image"
-                                        class="avatar rounded-circle me-2">
-                            {% endif %}
+                            {% show_avatar request.user %}
                             <p class="username m-0">{{ request.user.username }}</p>
                         </a>
                     </div>
@@ -144,7 +137,7 @@
                             </a>
                         </li>
 
-                                                <li class="my-2 p-1">
+                        <li class="my-2 p-1">
                             <a href="{% url 'user visited locations' pk=request.user.pk %}"
                                class="text-decoration-none text-dark d-flex align-items-center justify-content-left">
                                 <div class="p-2">

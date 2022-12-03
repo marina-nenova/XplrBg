@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load tags %}
 {% block page-content %}
     <!-- ========================  Main Content ======================== -->
     <div class="container-fluid">
@@ -23,13 +24,7 @@
                             <div class="d-flex justify-content-between">
                                 <!-- avatar -->
                                 <div class="d-flex">
-                                    {% if post.user.user_profile.profile_image %}
-                                        <img src="{{ post.user.user_profile.profile_image.url }}" alt=""
-                                             class="avatar rounded-circle me-2">
-                                    {% else %}
-                                        <img src="{% static 'images/profile-default_image.webp' %}" alt=""
-                                             class="avatar rounded-circle me-2">
-                                    {% endif %}
+                                    {% show_avatar post.user %}
                                     <div>
 
                                         <p class="m-0 fw-bold">
@@ -129,17 +124,7 @@
                                                         <!-- comment 1 -->
                                                         <div class="d-flex align-items-center my-1">
                                                             <!-- Avatar -->
-                                                            {% if comment.user.user_profile.profile_image %}
-                                                                <img src="{{ comment.user.user_profile.profile_image.url }}"
-                                                                     alt="avatar"
-                                                                     class="avatar rounded-circle me-2">
-                                                            {% else %}
-                                                                <img
-                                                                        src="{% static 'images/profile-default_image.webp' %}"
-                                                                        alt="default-image"
-                                                                        class="avatar rounded-circle me-2">
-
-                                                            {% endif %}
+                                                            {% show_avatar comment.user %}
                                                             <!-- comment text -->
                                                             <div class="p-3 rounded w-100 comment__input">
                                                                 <!-- menu -->
@@ -176,22 +161,8 @@
                                                           method="POST" class="d-flex my-1">
                                                         {% csrf_token %}
                                                         <!-- avatar -->
-                                                        {% if comment.user.user_profile.profile_image %}
-                                                            <img src="{{ comment.user.user_profile.profile_image.url }}"
-                                                                 alt="avatar"
-                                                                 class="avatar rounded-circle me-2">
-                                                        {% else %}
-                                                            <img
-                                                                    src="{% static 'images/profile-default_image.webp' %}"
-                                                                    alt="default-image"
-                                                                    class="avatar rounded-circle me-2">
+                                                        {% show_avatar request.user %}
 
-                                                        {% endif %}
-
-                                                        <!-- input -->
-                                                        {#                                                         <input type="text" maxlength="30" name="text"#}
-                                                        {#                                                        class="form-control border-0 rounded-pill post-input bg-gray"#}
-                                                        {#                                                        placeholder="Write a comment" />#}
                                                         {{form.text}}
 
                                                     </form>
