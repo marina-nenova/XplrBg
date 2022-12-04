@@ -1,7 +1,8 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block page-content %}
     {% load cloudinary %}
-    <div class="container-fluid" style="margin-top: 70px;">
+    <div class="container-fluid mb-3" style="margin-top: 70px;">
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-8">
                 <div class="card bg-white border-0 shadow">
@@ -68,6 +69,33 @@
                         <p>
                             {{ location.details }}
                         </p>
+                    </div>
+                    <div class="card-footer">
+                        {% if not location in visited_locations %}
+                            <div
+                                    class="d-flex align-items-center justify-content-between rounded text-muted p-1">
+                                <a href="{% url 'mark as visited' location.pk %}" class="tt"
+                                   type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                                   title="Mark as visited">
+                                    <i class="fa-solid fa-check bg-dark rounded-circle fs-5 text-light"></i>
+                                </a>
+                                <a href="{% url 'add to wishlist' location.pk %}" class="tt"
+                                   type="button" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Want to visit">
+                                    {% if location in wishlist_locations %}
+                                        <i class="fa-solid fa-heart bg-gray rounded-circle fs-5 text-danger"></i>
+                                    {% else %}
+                                        <i class="fa-solid fa-heart bg-gray rounded-circle fs-5 text-muted"></i>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="{% static 'images/vecteezy_green-tick-checkbox-illustration-isolated_10829962_2.png' %}"
+                                     style="height: 30px; width: 30px" alt="">
+                            </div>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

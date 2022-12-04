@@ -46,15 +46,14 @@
                                                 <h6>Visits: {{ location.times_visited }}</h6>
                                             </div>
                                         </div>
-                                    {% if location in visited_locations %}
-                                        <div class="d-flex justify-content-center align-items-center mt-2">
-                                            <a href="{% url 'create post' loc_pk=location.pk %}"
-                                               class="btn btn-outline-primary w-100" type="button">Create
-                                                Post</a>
-                                        </div>
-                                    {% endif %}
+                                        {% if location in visited_locations %}
+                                            <div class="d-flex justify-content-center align-items-center mt-2">
+                                                <a href="{% url 'create post' loc_pk=location.pk %}"
+                                                   class="btn btn-outline-primary w-100" type="button">Create
+                                                    Post</a>
+                                            </div>
+                                        {% endif %}
                                     </div>
-
                                     <div class="card-footer">
                                         {% if not location in visited_locations %}
                                             <div

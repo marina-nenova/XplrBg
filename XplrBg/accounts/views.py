@@ -41,6 +41,7 @@ class UserLogoutView(auth_views.LogoutView):
 class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
     template_name = 'profiles/profile-details.html'
     model = UserProfile
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         visited_locations_count = Location.objects.filter(visitedlocations__user_id=self.object.user_id).count()
@@ -72,16 +73,32 @@ class UserProfileDeleteView(LoginRequiredMixin, AuthorizationRequiredMixin, view
 class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-visited-locations.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_profile = UserProfile.objects.get(pk=self.kwargs['pk'])
+        context['is_owner'] = is_owner(self.request, user_profile)
+        return context
+
     def get_queryset(self):
-        visited_locations = Location.objects.filter(visitedlocations__user=self.kwargs['pk']).prefetch_related('location_images')
+        visited_locations = Location.objects.filter(visitedlocations__user=self.kwargs['pk']).prefetch_related(
+            'location_images')
         visited_locations = [get_location_feature_image(location) for location in visited_locations]
         return visited_locations
+
 
 
 class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-wishlist-locations.html'
 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_profile = UserProfile.objects.get(pk=self.kwargs['pk'])
+        context['is_owner'] = is_owner(self.request, user_profile)
+        return context
+
     def get_queryset(self):
-        wishlist_locations = Location.objects.filter(wishlist__user=self.kwargs['pk']).prefetch_related('location_images')
+        wishlist_locations = Location.objects.filter(wishlist__user=self.kwargs['pk']).prefetch_related(
+            'location_images')
         wishlist_locations = [get_location_feature_image(location) for location in wishlist_locations]
         return wishlist_locations

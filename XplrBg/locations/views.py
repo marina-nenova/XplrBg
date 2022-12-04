@@ -61,6 +61,14 @@ class LocationDetails(LoginRequiredMixin, views.DetailView):
     template_name = 'locations/location-details.html'
     context_object_name = 'location'
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(LocationDetails, self).get_context_data(**kwargs)
+
+        context['visited_locations'] = Location.objects.filter(visitedlocations__user=self.request.user)
+        context['wishlist_locations'] = Location.objects.filter(wishlist__user=self.request.user)
+
+        return context
+
 
 def rate_location(request, rating: int, location):
     Rating.objects.filter(location=location, user=request.user).delete()

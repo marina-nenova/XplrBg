@@ -28,7 +28,7 @@
 
                                     <img src="{{ location.feature_image.image.url }}" class="h-100"
                                          alt="{{ location.name }} image" style="max-height: 135px">
-
+                                    {% if is_owner %}
                                     <div class="card-footer">
                                         <div
                                                 class="d-flex align-items-center justify-content-between rounded text-muted p-1">
@@ -43,8 +43,8 @@
                                                     <i class="fa-solid fa-heart bg-gray rounded-circle fs-5 text-danger"></i>
                                             </a>
                                         </div>
-
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                             {% empty %}
