@@ -5,6 +5,7 @@ from django.db import models
 from django.db.models import Avg
 from django.utils.text import slugify
 
+from XplrBg.common.models import VisitedLocations
 from XplrBg.core.mixins.model_mixins import AuditInfoMixin
 
 UserModel = get_user_model()
@@ -74,6 +75,9 @@ class Location(AuditInfoMixin, models.Model):
 
     def average_rating(self):
         return Rating.objects.filter(location=self).aggregate(Avg("rating"))["rating__avg"] or 0
+
+    def times_visited(self):
+        return VisitedLocations.objects.filter(location=self).count()
 
     def __str__(self):
         return f"{self.name}"

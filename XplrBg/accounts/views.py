@@ -86,10 +86,8 @@ class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
         return visited_locations
 
 
-
 class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-wishlist-locations.html'
-
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
