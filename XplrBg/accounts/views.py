@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model, login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -78,7 +79,7 @@ class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_profile = UserProfile.objects.get(pk=self.kwargs['pk'])
+        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
         context['is_owner'] = is_owner(self.request, user_profile)
         return context
 
@@ -94,7 +95,7 @@ class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_profile = UserProfile.objects.get(pk=self.kwargs['pk'])
+        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
         context['is_owner'] = is_owner(self.request, user_profile)
         return context
 
@@ -110,7 +111,7 @@ class UserPostsView(LoginRequiredMixin, views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_profile = UserProfile.objects.get(pk=self.kwargs['pk'])
+        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
         context['is_owner'] = is_owner(self.request, user_profile)
         context['form'] = PostCommentForm()
         return context

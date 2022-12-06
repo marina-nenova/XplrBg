@@ -157,6 +157,7 @@
                                                         </div>
                                                     {% endfor %}
                                                     <!-- create comment -->
+                                                {% if request.user.is_authenticated %}
                                                     <form action="{% url 'comment post' post_pk=post.pk %}"
                                                           method="POST" class="d-flex my-1">
                                                         {% csrf_token %}
@@ -166,6 +167,7 @@
                                                         {{form.text}}
 
                                                     </form>
+                                                {% endif %}
                                                 </div>
                                             </div>
                                         </div>

@@ -27,26 +27,12 @@
     <div class="bg-white d-flex align-items-center fixed-top shadow feed-navbar">
         <div class="container-fluid">
             <div class="row align-items-center">
-                <!-- Search -->
                 <div class="col d-flex align-items-center">
                     <!-- Logo -->
                     <a href="{% url 'home' %}">
                         <img class="logo" src="{% static 'images/favicon.ico' %}" alt="logo">
                     </a>
                     <!-- End Logo -->
-
-                    <!-- Search Bar -->
-                    <div class="input-group search-bar">
-                        <span class="input-group-prepend d-md-block" data-bs-toggle="dropdown" aria-expanded="false">
-                            <form class="d-flex" role="search" class="search-bar">
-                                <input class="form-control me-2 rounded-pill search-input bg-gray border-0"
-                                       type="search"
-                                       placeholder="Search" aria-label="Search">
-                            </form>
-                        </span>
-                    </div>
-                    <!-- End Search Bar -->
-
 
                 </div>
                 <!-- Nav -->
@@ -73,7 +59,7 @@
 
                 </div>
                 <!-- End nav -->
-
+                {% if request.user.is_authenticated %}
                 <!-- Menus -->
                 <div class="col d-flex align-items-center justify-content-end">
                     <!-- Avatar -->
@@ -207,6 +193,12 @@
 
                 </div>
                 <!-- End Menus -->
+                    {% else %}
+                    <div class="col d-flex align-items-center justify-content-end ">
+                        <a href="{% url 'login user' %}" class="text-decoration-none fs-3" style="color: #3a9b8b">Login/Register</a>
+                    </div>
+
+                {% endif %}
             </div>
 
         </div>

@@ -12,7 +12,7 @@ from XplrBg.posts_common.forms import PostCommentForm
 UserModel = get_user_model()
 
 
-class ShowAllPosts(LoginRequiredMixin, views.ListView):
+class ShowAllPosts(views.ListView):
     model = Post
     template_name = 'feed.html'
     ordering = ('-updated_on',)
