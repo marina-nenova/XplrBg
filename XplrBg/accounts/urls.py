@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from XplrBg.accounts.views import UserRegistrationView, UserLoginView, UserLogoutView, UserProfileEditView, \
-    UserProfileDetailsView, UserVisitedLocationsView, UserWishlistLocationsView, UserProfileDeleteView
+    UserProfileDetailsView, UserVisitedLocationsView, UserWishlistLocationsView, UserProfileDeleteView, UserPostsView
 
 urlpatterns = (
     path('register/', UserRegistrationView.as_view(), name="register user"),
@@ -13,9 +13,10 @@ urlpatterns = (
         path('', UserProfileDetailsView.as_view(), name='details profile'),
         path('visited-locations/', UserVisitedLocationsView.as_view(), name='user visited locations'),
         path('wishlist-locations/', UserWishlistLocationsView.as_view(), name='user wishlist locations'),
+        path('posts/', UserPostsView.as_view(), name='user posts'),
     ])
 
-         ),
+    ),
 )
 
 from XplrBg.accounts.signals import *

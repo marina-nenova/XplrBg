@@ -59,7 +59,7 @@
                             <div class="d-flex justify-content-center align-items-center">
                                 <ul class="nav nav-pills">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Posts</a>
+                                        <a class="nav-link" href="{% url 'user posts' pk=object.pk %}">Posts</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'user visited locations' pk=object.pk %}">Visited

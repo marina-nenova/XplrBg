@@ -9,8 +9,11 @@ from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEd
 from XplrBg.accounts.models import UserProfile
 from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin
 from XplrBg.core.utils.locations_ustils import get_location_feature_image
+from XplrBg.core.utils.posts_utils import apply_likes_count, apply_post_liked_by_users
 from XplrBg.core.utils.utils import is_owner
 from XplrBg.locations.models import Location
+from XplrBg.posts.models import Post
+from XplrBg.posts_common.forms import PostCommentForm
 
 UserModel = get_user_model()
 
@@ -100,3 +103,20 @@ class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
             'location_images')
         wishlist_locations = [get_location_feature_image(location) for location in wishlist_locations]
         return wishlist_locations
+
+
+class UserPostsView(LoginRequiredMixin, views.ListView):
+    template_name = 'profiles/users-posts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_profile = UserProfile.objects.get(pk=self.kwargs['pk'])
+        context['is_owner'] = is_owner(self.request, user_profile)
+        context['form'] = PostCommentForm()
+        return context
+
+    def get_queryset(self):
+        queryset = Post.objects.filter(user_id=self.kwargs['pk'])
+        queryset = [apply_likes_count(post) for post in queryset]
+        queryset = [apply_post_liked_by_users(post, self.request.user) for post in queryset]
+        return queryset
