@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load paginator_tags %}
 {% load static %}
 {% block page-content %}
     <div class="row mx-2" style="margin-top: 80px;">
@@ -6,7 +7,7 @@
             {% include 'partials/locations-filter.html' %}
         </div>
         <div class="col-lg-9">
-            <div class="card border-0 shadow">
+            <div class="card border-0 shadow mb-3">
                 <div class="card-body">
                     <div class="card-header d-lg-none">
                         <div type="button" data-bs-toggle="collapse" data-bs-target="#filterMenu" aria-expanded="false"
@@ -29,8 +30,12 @@
                                             <h4 class="text-dark">{{ location.name }}</h4>
                                         </a>
                                     </div>
-                                    <img src="{{ location.feature_image.image.url }}" class="h-100"
-                                         alt="{{ location.name }} image" style="max-height: 182px">
+                                    {% for image in location.location_images.all %}
+                                        {% if image.is_feature %}
+                                            <img src="{{ image.image.url }}" class="h-100"
+                                                 alt="{{ location.name }} image" style="max-height: 182px">
+                                        {% endif %}
+                                    {% endfor %}
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
@@ -90,6 +95,38 @@
                                 </div>
                             </div>
                         {% endfor %}
+                        <div class="mt-3 d-flex justify-content-center align-items-center">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a href="?{% param_replace page=1 %}" class="page-link">First</a></li>
+                                        {% if page_obj.previous_page_number != 1 %}
+                                            <li class="page-item">
+                                                <a href="?{% param_replace page=page_obj.previous_page_number %}" class="page-link">Previous</a>
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <li class="page-item disabled"><a href="#" class="page-link">
+                                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</a></li>
+
+
+                                    {% if page_obj.has_next %}
+                                        {% if page_obj.next_page_number != paginator.num_pages %}
+                                            <li class="page-item">
+                                                <a href="?{% param_replace page=page_obj.next_page_number %}" class="page-link">Next</a>
+                                            </li>
+                                        {% endif %}
+                                        <li class="page-item">
+                                            <a href="?{% param_replace page=paginator.num_pages %}"
+                                               class="page-link">last</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+
+
+                        </div>
                     </div>
                 </div>
             </div>

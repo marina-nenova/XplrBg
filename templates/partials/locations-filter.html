@@ -1,71 +1,21 @@
 <div class="card mb-2 border-0 shadow">
-    <article class="card-group-item">
-        <a href="{% url 'all locations' %}">
-            <h6 class="text-decoration-none ms-3">
+    <header class="card-header">
+        <a href="{% url 'all locations' %}" class="text-decoration-none text-success">
+            <h6>
                 Show All
             </h6>
         </a>
-        <header class="card-header">
-            <h6 class="title">Search</h6>
-        </header>
+    </header>
+    <header class="card-header">
+        <h6 class="title">Filter By</h6>
+    </header>
 
-        <div class="card-body">
-            <div class="input-group search-bar">
-                <span class="input-group">
-                    <form class="d-flex search-bar" role="search" method="GET">
-                        <input class="form-control me-2 rounded-pill search-input bg-gray border-0" type="search"
-                               name="query"
-                               placeholder="Search" aria-label="Search">
-                    </form>
-                </span>
-            </div>
-        </div>
-    </article>
+    <div class="card-body">
 
-<form method="GET">
-    <article class="card-group-item">
-        <header class="card-header">
-            <h6 class="title">Filter By </h6>
-        </header>
-        <header class="card-header">
-            <h6 class="title">Category</h6>
-        </header>
-        <div class="filter-content">
-            <div class="card-body">
-                {% for category in location_categories %}
-                    <label class="form-check">
+        <form class="" method="GET" id="filterLocations">
+            {{ filterset.form.as_p }}
+            <button type="submit" class="btn btn-primary w-100 my-3">Filter</button>
+        </form>
 
-                        <input class="form-check-input" type="checkbox" value="{{ category }}" name="categories">
-                        <p class="form-check-label">
-                            {{ category }}
-                        </p>
-                    </label>
-
-                {% endfor %}
-            </div> <!-- card-body.// -->
-        </div>
-    </article> <!-- card-group-item.// -->
-
-    <article class="card-group-item">
-        <header class="card-header mt-1">
-            <h6 class="title">Region</h6>
-        </header>
-        <div class="filter-content">
-            <div class="card-body">
-                {% for region in location_regions %}
-                    <label class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{ region }}" name="regions">
-                        <p class="form-check-label">
-                            {{ region }}
-                        </p>
-                    </label>
-
-                {% endfor %}
-            </div> <!-- card-body.// -->
-        </div>
-    </article> <!-- card-group-item.// -->
-
-    <button class="btn btn-outline-secondary rounded-pill w-100" type="submit">Filter</button>
-
-    </form>
+    </div>
 </div>

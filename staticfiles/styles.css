@@ -74,35 +74,6 @@
 /* ============= END Navbar ============= */
 
 
-/* ============= Side Bar ============= */
-
-.side-bar {
-    max-width: 360px;
-    width: 100%;
-    z-index: 4;
-}
-
-#top-ten-left {
-    padding-top: 56px;
-}
-
-#top-ten-right {
-    left: initial !important;
-}
-
-.badge {
-    background-color: #25907e;
-}
-
-span {
-    color: white;
-}
-
-hr {
-    margin: 1px;
-}
-
-/* ============= END Side Bar ============= */
 
 /* ============= POSTS ============= */
 
