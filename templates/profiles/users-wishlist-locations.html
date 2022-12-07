@@ -22,8 +22,10 @@
                                     <div class="col-lg-4 col-md-6 mt-4">
                                         <div class="card h-100">
                                             <div class="card-header bg-transparent">
-                                                <h5 type="button" class="text-center" data-bs-toggle="modal"
-                                                    data-bs-target="#locationInfo">{{ location.name }}</h5>
+                                                <a href="{% url 'location details' location.slug %}" type="button"
+                                                   class="text-decoration-none d-flex justify-content-center align-items-center">
+                                                    <h4 class="text-dark">{{ location.name }}</h4>
+                                                </a>
                                             </div>
 
                                             <img src="{{ location.feature_image.image.url }}" class="h-100"
