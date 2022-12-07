@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+
+{% block page-content %}
+
+    <div class="container-fluid" style="margin-top: 70px;">
+        <div class="row d-flex justify-content-around align-items-center">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        Top 10 Rated
+                    </div>
+                    <div class="card-body py-0">
+                        <ol class="list-group list-group-numbered list-group-flush">
+                        {% for location in top_ten_rated %}
+                            <li class="list-group-item d-flex justify-content-between align-items-start py-1">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{ location.name }}</div>
+                                    Region: {{ location.region }}
+                                </div>
+                                <div class="ustify-content-end">
+                                    <small class="card-title avg_rating">Rating:
+                                        <i class="fa fa-star {% if location.average_rating > 0 %} checked {% endif %}"></i>
+                                        <i class="fa fa-star {% if location.average_rating > 1 %} checked {% endif %}"></i>
+                                        <i class="fa fa-star {% if location.average_rating > 2 %} checked {% endif %}"></i>
+                                        <i class="fa fa-star {% if location.average_rating > 3 %} checked {% endif %}"></i>
+                                        <i class="fa fa-star {% if location.average_rating > 4 %} checked {% endif %}"></i>
+                                    </small>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        Top 10 Visited
+                    </div>
+                    <div class="card-body py-0">
+                        <ol class="list-group list-group-numbered list-group-flush">
+                            {% for location in top_ten_visited %}
+                            <li class="list-group-item d-flex justify-content-between align-items-start py-1">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">{{ location.name}}</div>
+                                    Region: {{ location.region }}
+                                </div>
+                                <div class="justify-content-end">
+                                    <small class="card-title avg_rating">Visited: {{ location.times_visited }} times</small>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
