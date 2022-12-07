@@ -4,12 +4,21 @@ from django.contrib.auth import get_user_model, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 from XplrBg.accounts.models import UserProfile
+from XplrBg.accounts.validators import check_name_contains_only_letters
 from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin
 
 UserModel = get_user_model()
 
 
 class UserRegistrationForm(SetFieldsClassFormMixin, UserCreationForm):
+    first_name = forms.CharField(
+        max_length=30,
+        validators=(check_name_contains_only_letters,),
+    )
+    last_name = forms.CharField(
+        max_length=30,
+        validators=(check_name_contains_only_letters,),
+    )
     error_messages = {
         'password_mismatch': "The passwords don't match",
     }
@@ -28,6 +37,19 @@ class UserRegistrationForm(SetFieldsClassFormMixin, UserCreationForm):
             'password2': 'Repeat Password',
         }
 
+    def save(self, commit=True):
+        user = super().save(commit=commit)
+        first_name = self.cleaned_data['first_name']
+        last_name = self.cleaned_data['last_name']
+
+        profile = UserProfile(
+            first_name=first_name,
+            last_name=last_name,
+            user=user
+        )
+        if commit:
+            profile.save()
+        return user
 
 class UserLoginForm(AuthenticationForm):
     username = forms.EmailField(widget=forms.EmailInput(attrs={'class': ' form-control'}))

@@ -33,7 +33,8 @@
             <h1 class="display-2" id="title-text">
                 Explore BG
             </h1>
-            <p class="lead my-4" id="subtitle-text">Discover over 150 locations in Bulgaria and share your experience</p>
+            <p class="lead my-4" id="subtitle-text">Discover over 150 locations in Bulgaria and share your
+                experience</p>
         </div>
         <!-- Register form -->
         <div class="col-lg-6 text-center d-lg-block order-1 order-lg-2 my-4 g-5"
@@ -50,7 +51,24 @@
                                     <small class="text-danger m-0">{{ error }}</small>
                                 </div>
                             {% endfor %}
-
+                        </div>
+                        <div class="mb-1">
+                            <label for="firstName" class="form-label">First Name</label>
+                            {{ form.first_name }}
+                             {% for error in form.first_name.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="mb-1">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            {{ form.last_name }}
+                             {% for error in form.last_name.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="mb-1">
                             <label for="Password1" class="form-label">Password</label>

@@ -29,10 +29,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
     @property
     def username(self):
-        if self.user_profile.first_name and self.user_profile.last_name:
-            return f'{self.user_profile.first_name} {self.user_profile.last_name}'
-        else:
-            return self.email
+        return self.user_profile.get_full_name
 
 
 class UserProfile(AuditInfoMixin, models.Model):

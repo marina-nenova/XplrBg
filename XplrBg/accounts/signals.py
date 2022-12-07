@@ -7,17 +7,6 @@ from .tasks import remove_profile_photo_on_delete
 UserModel = get_user_model()
 
 
-@receiver(post_save, sender=UserModel)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=UserModel)
-def save_user_profile(sender, instance, **kwargs):
-    instance.user_profile.save()
-
-
 @receiver(pre_save, sender=UserProfile)
 def deleting_old_profile_pic_on_update(sender, instance, **kwargs):
     if instance.profile_image:
