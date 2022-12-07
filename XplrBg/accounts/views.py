@@ -76,6 +76,7 @@ class UserProfileDeleteView(LoginRequiredMixin, AuthorizationRequiredMixin, view
 
 class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-visited-locations.html'
+    paginate_by = 9
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,6 +93,7 @@ class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
 
 class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-wishlist-locations.html'
+    paginate_by = 9
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

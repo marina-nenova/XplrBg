@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load paginator_tags %}
 {% load static %}
 
 {% block page-content %}
@@ -29,13 +30,13 @@
                                             <img src="{{ location.feature_image.image.url }}" class="h-100"
                                                  alt="{{ location.name }} image" style="max-height: 135px">
                                             {% if is_owner %}
-                                            <div class="card-footer">
+                                                <div class="card-footer">
                                                     <div class="d-flex justify-content-center align-items-center">
                                                         <a href="{% url 'create post' loc_pk=location.pk %}"
                                                            class="btn btn-outline-primary w-100" type="button">Create
                                                             Post</a>
                                                     </div>
-                                            </div>
+                                                </div>
                                             {% endif %}
                                         </div>
                                     </div>
@@ -46,6 +47,45 @@
                                         </div>
                                     </div>
                                 {% endfor %}
+                                <div class="mt-3 d-flex justify-content-center align-items-center">
+                                    <nav aria-label="Page navigation">
+                                        {% if is_paginated %}
+                                            <ul class="pagination">
+
+                                                {% if page_obj.has_previous %}
+                                                    <li class="page-item"><a href="?page=1" class="page-link">First</a>
+                                                    </li>
+                                                    {% if page_obj.previous_page_number != 1 %}
+                                                        <li class="page-item">
+                                                            <a href="?page={{ page_obj.previous_page_number }}"
+                                                               class="page-link">Previous</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endif %}
+
+                                                <li class="page-item disabled"><a href="#" class="page-link">
+                                                    Page {{ page_obj.number }}
+                                                    of {{ page_obj.paginator.num_pages }}.</a></li>
+
+
+                                                {% if page_obj.has_next %}
+                                                    {% if page_obj.next_page_number != paginator.num_pages %}
+                                                        <li class="page-item">
+                                                            <a href="?page={{ page_obj.next_page_number }}"
+                                                               class="page-link">Next</a>
+                                                        </li>
+                                                    {% endif %}
+                                                    <li class="page-item">
+                                                        <a href="?page={{ paginator.num_pages }}"
+                                                           class="page-link">last</a>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+                                    </nav>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
