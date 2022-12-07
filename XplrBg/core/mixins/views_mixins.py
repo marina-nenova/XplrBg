@@ -1,6 +1,9 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views import generic as views
 
+from XplrBg.locations.models import Location
+
+
 class AuthorizationRequiredMixin(UserPassesTestMixin):
     def test_func(self):
         obj = self.get_object()
@@ -18,5 +21,15 @@ class FilteredLocationsView(views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filterset'] = self.filterset
+        return context
+
+
+class UserVisitedAndWishlistLocationsMixin(object):
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['visited_locations'] = Location.objects.filter(visitedlocations__user=self.request.user)
+        context['wishlist_locations'] = Location.objects.filter(wishlist__user=self.request.user)
+
         return context
 
