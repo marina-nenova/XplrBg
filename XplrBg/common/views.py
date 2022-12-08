@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.views import generic as views
 from XplrBg.common.models import Wishlist, VisitedLocations
+from XplrBg.core.utils.locations_ustils import get_location_url, remove_from_wishlist
 from XplrBg.core.utils.posts_utils import apply_likes_count, apply_post_liked_by_users
 from XplrBg.locations.models import Location
 from XplrBg.posts.models import Post
@@ -46,12 +46,7 @@ def add_to_wishlist(request, loc_pk):
     else:
         Wishlist.objects.create(user_id=request.user.id, location_id=location.id)
 
-    return redirect(request.META["HTTP_REFERER"] + f'#{loc_pk}')
-
-
-def remove_from_wishlist(current_user, location):
-    if Wishlist.objects.filter(user=current_user, location=location):
-        Wishlist.objects.get(user=current_user, location=location).delete()
+    return redirect(get_location_url(request, loc_pk))
 
 
 @login_required
@@ -62,7 +57,7 @@ def mark_as_visited(request, loc_pk):
         VisitedLocations.objects.create(location_id=location.id, user_id=request.user.id)
         remove_from_wishlist(request.user, location)
 
-    return redirect(request.META["HTTP_REFERER"] + f'#{loc_pk}')
+    return redirect(get_location_url(request, loc_pk))
 
 
 def go_back(request):

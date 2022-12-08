@@ -1,4 +1,4 @@
-from XplrBg.locations.models import Rating
+from XplrBg.common.models import Wishlist
 
 
 def get_location_feature_image(location):
@@ -6,19 +6,16 @@ def get_location_feature_image(location):
     return location
 
 
-def get_location_user_rating(location, user):
-    rating = Rating.objects.filter(location=location, user_id=user.id).first()
-    location.user_rating = rating.rating if rating else 0
-    return location
+def get_location_url(request, loc_pk):
+    return request.META["HTTP_REFERER"] + f'#{loc_pk}'
 
 
-# def location_visited_by_user(location, user):
-#     locations_visited_by_user = VisitedLocations.objects.filter(user_id=user.id)
-#     location.visited_by_user = location in locations_visited_by_user
+def remove_from_wishlist(current_user, location):
+    if Wishlist.objects.filter(user=current_user, location=location):
+        Wishlist.objects.get(user=current_user, location=location).delete()
+# def get_location_user_rating(location, user):
+#     rating = Rating.objects.filter(location=location, user_id=user.id).first()
+#     location.user_rating = rating.rating if rating else 0
 #     return location
-#
-#
-# def location_in_users_wishlist(location, user):
-#     locations_wished_by_user = Wishlist.objects.filter(user_id=user.id)
-#     location.wished_by_user = location in locations_wished_by_user
-#     return location
+
+

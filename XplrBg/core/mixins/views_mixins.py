@@ -1,6 +1,9 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.shortcuts import get_object_or_404
 from django.views import generic as views
 
+from XplrBg.accounts.models import UserProfile
+from XplrBg.core.utils.accounts_utils import is_owner
 from XplrBg.locations.models import Location
 
 
@@ -33,3 +36,10 @@ class UserVisitedAndWishlistLocationsMixin(object):
 
         return context
 
+
+class CheckIfOwnerMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
+        context['is_owner'] = is_owner(self.request, user_profile)
+        return context

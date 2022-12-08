@@ -2,16 +2,15 @@ from django.contrib.auth import get_user_model, login
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic as views
 
 from XplrBg.accounts.forms import UserRegistrationForm, UserLoginForm, ProfileEditForm, ProfileDeleteForm
 from XplrBg.accounts.models import UserProfile
-from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin
+from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin, CheckIfOwnerMixin
 from XplrBg.core.utils.locations_ustils import get_location_feature_image
 from XplrBg.core.utils.posts_utils import apply_likes_count, apply_post_liked_by_users
-from XplrBg.core.utils.utils import is_owner
+from XplrBg.core.utils.accounts_utils import is_owner
 from XplrBg.locations.models import Location
 from XplrBg.posts.models import Post
 from XplrBg.posts_common.forms import PostCommentForm
@@ -74,15 +73,9 @@ class UserProfileDeleteView(LoginRequiredMixin, AuthorizationRequiredMixin, view
     success_url = reverse_lazy('home')
 
 
-class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
+class UserVisitedLocationsView(CheckIfOwnerMixin, LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-visited-locations.html'
     paginate_by = 9
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
-        context['is_owner'] = is_owner(self.request, user_profile)
-        return context
 
     def get_queryset(self):
         visited_locations = Location.objects.filter(visitedlocations__user=self.kwargs['pk']).prefetch_related(
@@ -91,15 +84,9 @@ class UserVisitedLocationsView(LoginRequiredMixin, views.ListView):
         return visited_locations
 
 
-class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
+class UserWishlistLocationsView(CheckIfOwnerMixin, LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-wishlist-locations.html'
     paginate_by = 9
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
-        context['is_owner'] = is_owner(self.request, user_profile)
-        return context
 
     def get_queryset(self):
         wishlist_locations = Location.objects.filter(wishlist__user=self.kwargs['pk']).prefetch_related(
@@ -108,13 +95,11 @@ class UserWishlistLocationsView(LoginRequiredMixin, views.ListView):
         return wishlist_locations
 
 
-class UserPostsView(LoginRequiredMixin, views.ListView):
+class UserPostsView(CheckIfOwnerMixin, LoginRequiredMixin, views.ListView):
     template_name = 'profiles/users-posts.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_profile = get_object_or_404(UserProfile, pk=self.kwargs['pk'])
-        context['is_owner'] = is_owner(self.request, user_profile)
         context['form'] = PostCommentForm()
         return context
 
