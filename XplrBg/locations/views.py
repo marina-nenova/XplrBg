@@ -20,7 +20,7 @@ class LocationDetails(UserVisitedAndWishlistLocationsMixin, LoginRequiredMixin, 
     context_object_name = 'location'
 
 
-class TopTenLocationsView(views.TemplateView):
+class TopTenLocationsView(LoginRequiredMixin, views.TemplateView):
     template_name = 'locations/top-ten-locations.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):

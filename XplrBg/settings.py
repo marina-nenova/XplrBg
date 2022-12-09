@@ -140,7 +140,7 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 LOGIN_URL = reverse_lazy('login user')
-LOGOUT_REDIRECT_URL = reverse_lazy('login user')
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 
 

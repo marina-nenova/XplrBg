@@ -40,8 +40,10 @@
         <div class="col-lg-6 text-center d-lg-block order-1 order-lg-2 my-5 g-5" style="max-width: 28rem; width: 100%">
             <div class="card bg-white shadow rounded border-0 p-3">
                 <div class="card-body text-center text-md-start">
+                    {% if message %}
+                        <small class="text-danger">{{ message }}</small>
+                    {% endif %}
                     <form action="{% url 'login user' %}" method="POST">
-                    <input type="hidden" name="next" value="{{ next }}">
                         {% csrf_token %}
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -58,6 +60,7 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
+                        <input type="hidden" name="next" value="{{ next }}">
                         <button type="submit" class="btn btn-primary w-100 my-2">Log In</button>
                         <div class="mb-3">
                             <p>Haven't signed up yet?</p>

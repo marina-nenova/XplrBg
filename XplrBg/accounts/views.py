@@ -33,8 +33,11 @@ class UserLoginView(SuccessMessageMixin, auth_views.LoginView):
     template_name = 'accounts/login.html'
     form_class = UserLoginForm
 
-    def get_success_url(self):
-        return reverse_lazy('home')
+    def get_context_data(self, **kwargs):
+        context = super(UserLoginView, self).get_context_data(**kwargs)
+        if 'next' in self.request.GET:
+            context['message'] = 'You need to be logged in to view this page.'
+        return context
 
 
 class UserLogoutView(auth_views.LogoutView):

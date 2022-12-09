@@ -10,8 +10,10 @@ class PostCommentsInline(admin.TabularInline):
     model = PostComment
     form = PostCommentForm
 
+
 class PostLikeInline(admin.TabularInline):
     model = PostLike
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
