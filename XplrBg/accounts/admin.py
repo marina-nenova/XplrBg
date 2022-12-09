@@ -53,5 +53,8 @@ class AppUserAdmin(UserAdmin):
 @admin.register(UserProfile)
 class ProfileAdmin(admin.ModelAdmin):
     ordering = ('first_name',)
-    list_display = ['first_name', 'last_name', 'lives_at', 'profile_image']
+    list_display = ['first_name', 'last_name', 'lives_at', 'profile_image', 'user']
     add_form = ProfileEditForm
+    list_filter = ('lives_at', )
+    search_fields = ('first_name', 'last_name', 'user__email', 'lives_at', )
+    sortable_by = ('id', 'first_name', 'last_name')

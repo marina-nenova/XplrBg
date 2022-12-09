@@ -17,10 +17,10 @@ class LocationsAdmin(admin.ModelAdmin):
 
 
 @admin.register(LocationCategory)
-class LocationsAdmin(admin.ModelAdmin):
+class LocationsCategoryAdmin(admin.ModelAdmin):
     list_display = ('category_name',)
 
 
 @admin.register(LocationRegion)
-class LocationsAdmin(admin.ModelAdmin):
+class LocationsRegionAdmin(admin.ModelAdmin):
     list_display = ('region',)

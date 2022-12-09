@@ -13,9 +13,3 @@ def get_location_url(request, loc_pk):
 def remove_from_wishlist(current_user, location):
     if Wishlist.objects.filter(user=current_user, location=location):
         Wishlist.objects.get(user=current_user, location=location).delete()
-# def get_location_user_rating(location, user):
-#     rating = Rating.objects.filter(location=location, user_id=user.id).first()
-#     location.user_rating = rating.rating if rating else 0
-#     return location
-
-
