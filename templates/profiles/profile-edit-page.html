@@ -26,27 +26,33 @@
                             {{form.profile_image}}
                         </div>
 
-{#                            {% for error in form.errors %}#}
-{#                                <div>#}
-{#                                    <small class="text-danger m-0">{{ error }}</small>#}
-{#                                </div>#}
-{#                            {% endfor %}#}
-
                         <div class="mb-1" >
                             <label for="firstName" class="form-label">First Name</label>
                             {{ form.first_name }}
-                            {#<input type="text" class="form-control" id="firstName" aria-describedby="emailHelp">#}
+                            {% for error in form.first_name.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
                         </div>
                         <div class="mb-1">
                             <label for="lastName" class="form-label">Last Name</label>
                             {{ form.last_name }}
-                            {#<input type="text" class="form-control" id="lastName" aria-describedby="emailHelp">#}
+                            {% for error in form.last_name.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
                         </div>
 
                         <div class="mb-1">
                             <label for="livesAt" class="form-label">Where do you live</label>
                             {{ form.lives_at }}
-                            {#<input type="text" class="form-control" id="lastName" aria-describedby="emailHelp">#}
+                            {% for error in form.lives_at.errors %}
+                                <div>
+                                    <small class="text-danger m-0">{{ error }}</small>
+                                </div>
+                            {% endfor %}
                         </div>
 
                         <button type="submit" class="btn btn-primary w-100 my-3">Save Changes</button>

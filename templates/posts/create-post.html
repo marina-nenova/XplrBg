@@ -21,12 +21,9 @@
                                 {{ form.text }}
                             </div>
 
-{#                            {% for error in form.errors %}#}
-{#                                <div>#}
-{#                                    <small class="text-danger m-0">{{ error }}</small>#}
-{#                                </div>#}
-{#                            {% endfor %}#}
                             <div class="rate">
+                                <div>Rate this location</div>
+
                                 <input type="radio" id="star5" name="rate" value="5"/>
                                 <label for="star5" title="text">5 stars</label>
                                 <input type="radio" id="star4" name="rate" value="4"/>
@@ -38,7 +35,7 @@
                                 <input type="radio" id="star1" name="rate" value="1"/>
                                 <label for="star1" title="text">1 star</label>
                             </div>
-                            <button type="submit" class="btn btn-primary w-100 my-3">Post</button>
+                            <button type="submit" class="btn btn-primary w-100 my-4">Post</button>
 
                         </form>
                     </div>

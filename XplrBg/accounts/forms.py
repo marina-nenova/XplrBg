@@ -14,10 +14,12 @@ class UserRegistrationForm(SetFieldsClassFormMixin, UserCreationForm):
     first_name = forms.CharField(
         max_length=30,
         validators=(check_name_contains_only_letters,),
+        required=True,
     )
     last_name = forms.CharField(
         max_length=30,
         validators=(check_name_contains_only_letters,),
+        required=True,
     )
     error_messages = {
         'password_mismatch': "The passwords don't match",
@@ -51,10 +53,8 @@ class UserRegistrationForm(SetFieldsClassFormMixin, UserCreationForm):
             profile.save()
         return user
 
-class UserLoginForm(AuthenticationForm):
-    username = forms.EmailField(widget=forms.EmailInput(attrs={'class': ' form-control'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': ' form-control'}))
 
+class UserLoginForm(SetFieldsClassFormMixin, AuthenticationForm):
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")

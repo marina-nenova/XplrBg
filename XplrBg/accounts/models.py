@@ -1,10 +1,11 @@
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
-from django.core.validators import MinValueValidator, MinLengthValidator
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 from XplrBg.accounts.managers import AppUserManager
+from XplrBg.accounts.validators import check_name_contains_only_letters
 from XplrBg.core.mixins.model_mixins import AuditInfoMixin
 
 
@@ -44,16 +45,16 @@ class UserProfile(AuditInfoMixin, models.Model):
 
     first_name = models.CharField(
         max_length=FIRST_NAME_MAX_LENGTH,
-        null=True,
-        blank=True,
-        validators=(MinLengthValidator(FIRST_NAME_MIN_LENGTH),)
+        null=False,
+        blank=False,
+        validators=(MinLengthValidator(FIRST_NAME_MIN_LENGTH), check_name_contains_only_letters,)
     )
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LENGTH,
-        null=True,
-        blank=True,
-        validators=(MinLengthValidator(LAST_NAME_MIN_LENGTH),)
+        null=False ,
+        blank=False,
+        validators=(MinLengthValidator(LAST_NAME_MIN_LENGTH), check_name_contains_only_letters,)
     )
     lives_at = models.CharField(
         max_length=LIVES_AT_MAX_LENGTH,
