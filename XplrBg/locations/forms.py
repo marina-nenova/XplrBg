@@ -25,6 +25,3 @@ class LocationImageForm(forms.ModelForm):
 class CreateLocationForm(forms.ModelForm):
     class Meta:
         fields = ('name', 'short_description', 'details', 'town', 'category', 'region')
-
-
-

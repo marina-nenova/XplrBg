@@ -1,7 +1,7 @@
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 
-from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin, DisabledFormMixin
+from XplrBg.core.mixins.form_mixins import SetFieldsClassFormMixin
 from XplrBg.posts.models import Post
 
 

@@ -10,7 +10,6 @@ from XplrBg.accounts.models import UserProfile
 from XplrBg.core.mixins.views_mixins import AuthorizationRequiredMixin, CheckIfOwnerMixin
 from XplrBg.core.utils.locations_ustils import get_location_feature_image
 from XplrBg.core.utils.posts_utils import apply_likes_count, apply_post_liked_by_users
-from XplrBg.core.utils.accounts_utils import is_owner
 from XplrBg.locations.models import Location
 from XplrBg.posts.models import Post
 from XplrBg.posts_common.forms import PostCommentForm
@@ -44,17 +43,14 @@ class UserLogoutView(auth_views.LogoutView):
     pass
 
 
-class UserProfileDetailsView(LoginRequiredMixin, views.DetailView):
+class UserProfileDetailsView(LoginRequiredMixin, CheckIfOwnerMixin, views.DetailView):
     template_name = 'profiles/profile-details.html'
     model = UserProfile
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        visited_locations_count = Location.objects.filter(visitedlocations__user_id=self.object.user_id).count()
-
-        context['is_owner'] = is_owner(self.request, self.object)
+        visited_locations_count = self.object.user.visited_locations.all().count()
         context['visited_locations_count'] = visited_locations_count
-
         return context
 
 
