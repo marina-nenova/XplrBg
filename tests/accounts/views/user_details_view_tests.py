@@ -1,5 +1,3 @@
-from unittest import TestCase
-
 from django.urls import reverse_lazy
 
 from tests.accounts.BaseTestCase import TestCaseBase
@@ -50,4 +48,3 @@ class UserDetailsViewTests(TestCaseBase):
         response = self.client.get(reverse_lazy('details profile', kwargs={'pk': user.pk}))
 
         self.assertEqual(5, response.context['visited_locations_count'])
-

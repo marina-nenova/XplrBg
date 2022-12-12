@@ -1,8 +1,7 @@
 from django.urls import reverse_lazy
 
 from tests.accounts.BaseTestCase import TestCaseBase
-from tests.utils.creation_utils import create_visited_locations_for_user, create_wishlist_locations_for_user, \
-    create_posts_for_user
+from tests.utils.creation_utils import create_posts_for_user
 
 
 class UserPostsViewTest(TestCaseBase):

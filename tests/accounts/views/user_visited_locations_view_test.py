@@ -51,7 +51,7 @@ class UserVisitedLocationsViewTest(TestCaseBase):
         locations = [vl.location for vl in visited_locations]
 
         response = self.client.get(reverse_lazy('user visited locations', kwargs={'pk': user.pk}),
-                                   data={'page':2})
+                                   data={'page': 2})
 
         object_list = response.context['object_list']
 

@@ -1,4 +1,3 @@
-from django.test import TestCase
 from django.urls import reverse
 
 from XplrBg.accounts.models import UserProfile
@@ -28,4 +27,3 @@ class UserRegistrationViewTests(TestCaseBase):
         )
         # self.assertEqual(user.profile, Profile.objects.get(user=new_user))
         self.assertIsNotNone(UserProfile.objects.get(user=response.wsgi_request.user))
-
