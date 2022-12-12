@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 
 from tests.accounts.BaseTestCase import TestCaseBase
-from tests.utils.creation_utils import create_visited_locations_for_user, create_wishlist_locations_for_user
+from tests.utils.creation_utils import create_wishlist_locations_for_user
 
 
 class UserWishlistLocationsViewTest(TestCaseBase):
@@ -53,7 +53,7 @@ class UserWishlistLocationsViewTest(TestCaseBase):
         locations = [vl.location for vl in wishlist_locations]
 
         response = self.client.get(reverse_lazy('user wishlist locations', kwargs={'pk': user.pk}),
-                                   data={'page':2})
+                                   data={'page': 2})
 
         object_list = response.context['object_list']
 
