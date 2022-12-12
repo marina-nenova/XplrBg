@@ -1,9 +1,10 @@
 import cloudinary.uploader
 from django.contrib.auth import get_user_model
-from django.db.models.signals import post_save, pre_save, post_delete
+from django.db.models.signals import pre_save, post_delete
 from django.dispatch import receiver
 from .models import UserProfile
 from .tasks import remove_profile_photo_on_delete
+
 UserModel = get_user_model()
 
 

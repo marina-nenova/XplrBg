@@ -52,7 +52,7 @@ class UserProfile(AuditInfoMixin, models.Model):
 
     last_name = models.CharField(
         max_length=LAST_NAME_MAX_LENGTH,
-        null=False ,
+        null=False,
         blank=False,
         validators=(MinLengthValidator(LAST_NAME_MIN_LENGTH), check_name_contains_only_letters,)
     )

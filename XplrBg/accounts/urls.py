@@ -16,7 +16,7 @@ urlpatterns = (
         path('posts/', UserPostsView.as_view(), name='user posts'),
     ])
 
-    ),
+         ),
 )
 
 from XplrBg.accounts.signals import *

@@ -18,7 +18,7 @@
                             <label for="postText" class="form-label d-flex justify-content-center">Are you sure you want
                                 to delete your profile?</label>
                             <div class="d-flex justify-content-around">
-                                <a href="{% url 'go back' %}" type="button"
+                                <a href="{{ request.META.HTTP_REFERER }}" type="button"
                                    class="btn btn-primary my-3">Cancel</a>
                                 <button type="submit" class="btn btn-danger my-3">Delete</button>
                             </div>

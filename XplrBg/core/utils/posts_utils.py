@@ -1,3 +1,4 @@
+from XplrBg.locations.models import Rating
 from XplrBg.posts_common.models import PostLike
 
 
@@ -22,3 +23,8 @@ def apply_post_liked_by_users(post, user):
     post.liked_by_user = True if post_liked_by_user else False
     return post
 
+
+def get_location_user_rating(location, user):
+    rating = Rating.objects.filter(location=location, user_id=user.id).first()
+    user_rating = rating.rating if rating else 0
+    return user_rating

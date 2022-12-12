@@ -17,4 +17,3 @@ class WishlistLocationsAdmin(admin.ModelAdmin):
     list_filter = ('user', 'location')
     search_fields = ('location__name', 'user__email',)
     sortable_by = ('id', 'location')
-

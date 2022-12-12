@@ -32,18 +32,18 @@
                                     <small class="text-danger m-0">{{ error }}</small>
                                 </div>
                             {% endfor %}
+                            <p>Rate this location</p>
                             <div class="rate">
-                                <div>Rate this location</div>
                                 <input type="radio" id="star5" name="rate" value="5"/>
-                                <label for="star5" title="text">5 stars</label>
+                                <label for="star5" title="five" {% if user_location_rating > 4 %} style="color: #ffc700;" {% endif %}>5 stars</label>
                                 <input type="radio" id="star4" name="rate" value="4"/>
-                                <label for="star4" title="text">4 stars</label>
+                                <label for="star4" title="four" {% if user_location_rating > 3 %} style="color: #ffc700;" {% endif %}>4 stars</label>
                                 <input type="radio" id="star3" name="rate" value="3"/>
-                                <label for="star3" title="text">3 stars</label>
+                                <label for="star3" title="three" {% if user_location_rating > 2 %} style="color: #ffc700;" {% endif %}>3 stars</label>
                                 <input type="radio" id="star2" name="rate" value="2"/>
-                                <label for="star2" title="text">2 stars</label>
+                                <label for="star2" title="two" {% if user_location_rating > 1 %} style="color: #ffc700;" {% endif %}>2 stars</label>
                                 <input type="radio" id="star1" name="rate" value="1"/>
-                                <label for="star1" title="text">1 star</label>
+                                <label for="star1" title="one" {% if user_location_rating > 0 %} style="color: #ffc700;" {% endif %}>1 star</label>
                             </div>
                             <button type="submit" class="btn btn-primary w-100 my-4">Post</button>
 

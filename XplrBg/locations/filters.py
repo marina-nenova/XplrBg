@@ -1,6 +1,4 @@
 import django_filters
-from django import forms
-from django_filters import CharFilter
 
 from XplrBg.locations.models import Location
 

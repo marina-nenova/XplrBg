@@ -58,7 +58,3 @@ def mark_as_visited(request, loc_pk):
         remove_from_wishlist(request.user, location)
 
     return redirect(get_location_url(request, loc_pk))
-
-
-def go_back(request):
-    return redirect(request.META["HTTP_REFERER"])
