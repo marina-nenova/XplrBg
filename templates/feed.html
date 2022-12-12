@@ -28,10 +28,13 @@
                                     <div>
 
                                         <p class="m-0 fw-bold">
-                                            <a href="{% url 'details profile' pk=post.user.pk %}">
+                                            <a href="{% url 'details profile' pk=post.user.pk %}"
+                                               class="text-decoration-none text-success">
                                                 {{ post.user.username }}
-                                                </a>
-                                            reviewed <a href="{% url 'location details' slug=post.location.slug %}">{{ post.location.name }}</a></p>
+                                            </a>
+                                            reviewed <a href="{% url 'location details' slug=post.location.slug %}"
+                                                        class="text-decoration-none text-success">{{ post.location.name }}</a>
+                                        </p>
                                         <span class="text-muted fs-7">{{ post.updated_on|timesince }} ago</span>
                                     </div>
                                 </div>
@@ -134,17 +137,17 @@
                                                         </div>
                                                     {% endfor %}
                                                     <!-- create comment -->
-                                                {% if request.user.is_authenticated %}
-                                                    <form action="{% url 'comment post' post_pk=post.pk %}"
-                                                          method="POST" class="d-flex my-1">
-                                                        {% csrf_token %}
-                                                        <!-- avatar -->
-                                                        {% show_avatar request.user %}
+                                                    {% if request.user.is_authenticated %}
+                                                        <form action="{% url 'comment post' post_pk=post.pk %}"
+                                                              method="POST" class="d-flex my-1">
+                                                            {% csrf_token %}
+                                                            <!-- avatar -->
+                                                            {% show_avatar request.user %}
 
-                                                        {{form.text}}
+                                                            {{ form.text }}
 
-                                                    </form>
-                                                {% endif %}
+                                                        </form>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

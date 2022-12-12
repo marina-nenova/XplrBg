@@ -19,7 +19,8 @@
                             <div class="row justify-content-center">
                                 {% for post in object_list %}
                                     <!-- Posts -->
-                                    <div class="bg-white p-4 rounded shadow my-2" id="post-{{ post.id }}" style="width: 75%;">
+                                    <div class="bg-white p-4 rounded shadow my-2" id="post-{{ post.id }}"
+                                         style="width: 75%;">
                                         <!-- Author -->
                                         <div class="d-flex justify-content-between">
                                             <!-- avatar -->
@@ -28,11 +29,13 @@
                                                 <div>
 
                                                     <p class="m-0 fw-bold">
-                                                        <a href="{% url 'details profile' pk=post.user.pk %}">
+                                                        <a href="{% url 'details profile' pk=post.user.pk %}"
+                                                           class="text-decoration-none text-success">
                                                             {{ post.user.username }}
                                                         </a>
                                                         reviewed <a
-                                                            href="{% url 'location details' slug=post.location.slug %}">{{ post.location.name }}</a>
+                                                            href="{% url 'location details' slug=post.location.slug %}"
+                                                            class="text-decoration-none text-success">{{ post.location.name }}</a>
                                                     </p>
                                                     <span class="text-muted fs-7">{{ post.updated_on|timesince }} ago</span>
                                                 </div>
@@ -41,7 +44,7 @@
                                             {% if is_owner %}
                                                 <i class="fas fa-ellipsis-h" type="button" data-bs-toggle="dropdown"
                                                    aria-expanded="false"
-                                                   id="post1Menu"></i>
+                                                   id="post1Menu" style="height: 20px;"></i>
                                                 <!-- edit menu -->
                                                 <ul class="dropdown-menu border-0 shadow" aria-labelledby="post1Menu">
                                                     <li class="d-flex align-items-center">
