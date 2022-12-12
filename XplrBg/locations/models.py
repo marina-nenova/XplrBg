@@ -73,7 +73,6 @@ class Location(AuditInfoMixin, models.Model):
         blank=True,
     )
 
-
     @property
     def average_rating(self):
         return Rating.objects.filter(location=self).aggregate(Avg("rating"))["rating__avg"] or 0
