@@ -1,6 +1,6 @@
-from django.db.models.signals import post_delete, post_save, pre_save
+from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
-from .tasks import remove_image_on_delete
+from .tasks import remove_post_image_on_post_delete
 from XplrBg.posts.models import Post
 import cloudinary.uploader
 
@@ -18,4 +18,4 @@ def deleting_old_image_on_post_edit(sender, instance, **kwargs):
 @receiver(post_delete, sender=Post)
 def deleting_post_image_on_delete_post(sender, instance, **kwargs):
     if instance.image:
-        remove_image_on_delete.delay(instance.image.public_id)
+        remove_post_image_on_post_delete.delay(instance.image.public_id)
