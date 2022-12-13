@@ -28,7 +28,7 @@ class UserRegistrationView(views.CreateView):
         return result
 
 
-class UserLoginView(SuccessMessageMixin, auth_views.LoginView):
+class UserLoginView(auth_views.LoginView):
     template_name = 'accounts/login.html'
     form_class = UserLoginForm
 

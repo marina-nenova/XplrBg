@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic as views
 
@@ -11,6 +12,7 @@ class ShowAllLocations(UserVisitedAndWishlistLocationsMixin, LoginRequiredMixin,
     template_name = 'locations/locations-list.html'
     model = Location
     filterset_class = LocationsFilter
+    ordering = ('-updated_on',)
     paginate_by = 9
 
 
@@ -31,6 +33,7 @@ class TopTenLocationsView(LoginRequiredMixin, views.TemplateView):
         return context
 
 
+@login_required
 def rate_location(request, rating: int, location):
     Rating.objects.filter(location=location, user=request.user).delete()
     location.rating_set.create(user=request.user, rating=rating)
